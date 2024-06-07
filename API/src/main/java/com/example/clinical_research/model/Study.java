@@ -1,46 +1,36 @@
 package com.example.clinical_research.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Study {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long studyId;
+
     private String title;
     private String therapeutics;
     private String description;
     private String status;
 
-    @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
-    private List<Patient> patients = new ArrayList<>();
-
-    // Constructors
+    // Constructors, getters, and setters
     public Study() {
     }
 
-    public Study(String title, String therapeutics, String description, String status) {
+    public Study(Long studyId, String title, String therapeutics, String description, String status) {
+        this.studyId = studyId;
         this.title = title;
         this.therapeutics = therapeutics;
         this.description = description;
         this.status = status;
     }
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
+    public Long getStudyId() {
+        return studyId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setStudyId(Long studyId) {
+        this.studyId = studyId;
     }
 
     public String getTitle() {
@@ -73,13 +63,5 @@ public class Study {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public List<Patient> getPatients() {
-        return patients;
-    }
-
-    public void setPatients(List<Patient> patients) {
-        this.patients = patients;
     }
 }

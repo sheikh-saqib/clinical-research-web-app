@@ -1,0 +1,143 @@
+[
+  {
+    "studyId": 1,
+    "title": "Effects of Sleep on Cognitive Performance",
+    "therapeutics": "Neuroscience",
+    "description": "Investigates how sleep duration impacts cognitive abilities.",
+    "status": "Recruiting"
+  },
+  {
+    "studyId": 2,
+    "title": "Climate Change and Coastal Erosion",
+    "therapeutics": "Environmental Science",
+    "description": "Examines the relationship between climate change and coastal erosion rates.",
+    "status": "Completed"
+  },
+  {
+    "studyId": 3,
+    "title": "AI in Medical Diagnosis",
+    "therapeutics": "Computer Science",
+    "description": "Evaluates the effectiveness of AI in diagnosing medical conditions.",
+    "status": "Withdrawn"
+  },
+  {
+    "studyId": 4,
+    "title": "Nutritional Impact on Adolescent Growth",
+    "therapeutics": "Nutrition",
+    "description": "Studies the effects of different diets on adolescent physical development.",
+    "status": "Terminated"
+  },
+  {
+    "studyId": 5,
+    "title": "Renewable Energy Adoption in Urban Areas",
+    "therapeutics": "Energy Studies",
+    "description": "Analyses factors influencing the adoption of renewable energy in cities.",
+    "status": "Planning"
+  },
+  {
+    "studyId": 6,
+    "title": "Social Media Influence on Teen Behaviour",
+    "therapeutics": "Psychology",
+    "description": "Explores how social media usage affects teenagers' behaviour and mental health.",
+    "status": "Recruiting"
+  },
+  {
+    "studyId": 7,
+    "title": "Biodiversity in Urban Parks",
+    "therapeutics": "Ecology",
+    "description": "Investigates the biodiversity levels in urban park areas.",
+    "status": "Completed"
+  },
+  {
+    "studyId": 8,
+    "title": "Economic Impact of Global Pandemics",
+    "therapeutics": "Economics",
+    "description": "Studies the economic consequences of global pandemics.",
+    "status": "Withdrawn"
+  },
+  {
+    "studyId": 9,
+    "title": "Language Acquisition in Early Childhood",
+    "therapeutics": "Linguistics",
+    "description": "Examines how young children acquire language skills.",
+    "status": "Terminated"
+  },
+  {
+    "studyId": 10,
+    "title": "Water Quality in Rural Communities",
+    "therapeutics": "Environmental Health",
+    "description": "Evaluates water quality issues in rural communities and their health impacts.",
+    "status": "Planning"
+  },
+  {
+    "studyId": 11,
+    "title": "Cybersecurity Threats in IoT Devices",
+    "therapeutics": "Information Technology",
+    "description": "Analyses security vulnerabilities in Internet of Things (IoT) devices.",
+    "status": "Recruiting"
+  },
+  {
+    "studyId": 12,
+    "title": "Impact of Exercise on Mental Health",
+    "therapeutics": "Health Sciences",
+    "description": "Investigates how regular exercise influences mental health.",
+    "status": "Completed"
+  },
+  {
+    "studyId": 13,
+    "title": "Agricultural Practices and Soil Health",
+    "therapeutics": "Agronomy",
+    "description": "Studies the effect of different agricultural practices on soil health.",
+    "status": "Withdrawn"
+  },
+  {
+    "studyId": 14,
+    "title": "Genetic Factors in Disease Resistance",
+    "therapeutics": "Genetics",
+    "description": "Explores genetic factors contributing to disease resistance in humans.",
+    "status": "Terminated"
+  },
+  {
+    "studyId": 15,
+    "title": "Urbanization and Air Quality",
+    "therapeutics": "Urban Studies",
+    "description": "Examines the impact of urbanization on air quality in major cities.",
+    "status": "Planning"
+  },
+  {
+    "studyId": 16,
+    "title": "Educational Technology in Remote Learning",
+    "therapeutics": "Education",
+    "description": "Investigates the effectiveness of educational technologies in remote learning.",
+    "status": "Recruiting"
+  },
+  {
+    "studyId": 17,
+    "title": "Marine Life Response to Ocean Pollution",
+    "therapeutics": "Marine Biology",
+    "description": "Studies how marine life responds to various types of ocean pollution.",
+    "status": "Completed"
+  },
+  {
+    "studyId": 18,
+    "title": "Public Transportation and Urban Mobility",
+    "therapeutics": "Transportation Studies",
+    "description": "Analyses the role of public transportation in enhancing urban mobility.",
+    "status": "Withdrawn"
+  },
+  {
+    "studyId": 19,
+    "title": "Cultural Heritage Preservation Techniques",
+    "therapeutics": "Archaeology",
+    "description": "Explores techniques for preserving cultural heritage sites.",
+    "status": "Terminated"
+  },
+  {
+    "studyId": 20,
+    "title": "Artificial Intelligence in Financial Markets",
+    "therapeutics": "Finance",
+    "description": "Investigates the application of AI in predicting financial market trends.",
+    "status": "Planning"
+  }
+]
+

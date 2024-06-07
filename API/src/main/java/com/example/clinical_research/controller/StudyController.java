@@ -1,11 +1,13 @@
 package com.example.clinical_research.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -46,5 +48,34 @@ public class StudyController {
     @DeleteMapping("/{id}")
     public void deleteStudy(@PathVariable Long id) {
         studyService.deleteById(id);
+    }
+
+    @PatchMapping("/{id}")
+    public Study patchStudy(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
+        Study study = studyService.getStudyById(id)
+                .orElseThrow(() -> new RuntimeException("Study not found with id: " + id));
+
+        // Apply partial updates
+        updates.forEach((key, value) -> {
+            switch (key) {
+                case "title":
+                    study.setTitle((String) value);
+                    break;
+                case "therapeutics":
+                    study.setTherapeutics((String) value);
+                    break;
+                case "description":
+                    study.setDescription((String) value);
+                    break;
+                case "status":
+                    study.setStatus((String) value);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid field: " + key);
+            }
+        });
+
+        // Save the updated study
+        return studyService.updateStudy(id, study);
     }
 }

@@ -1,46 +1,37 @@
 package com.example.clinical_research.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Patient {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long patientID;
     private String name;
     private int age;
     private String gender;
     private String condition;
-    private String recruitment;
-
-    @ManyToOne
-    @JoinColumn(name = "study_id")
-    private Study study;
+    private String recruitmentDate;
 
     // Constructors
     public Patient() {
     }
 
-    public Patient(String name, int age, String gender, String condition, String recruitment) {
+    public Patient(String name, int age, String gender, String condition, String recruitmentDate) {
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.condition = condition;
-        this.recruitment = recruitment;
+        this.recruitmentDate = recruitmentDate;
     }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
+    public Long getPatientID() {
+        return patientID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPatientID(Long patientID) {
+        this.patientID = patientID;
     }
 
     public String getName() {
@@ -75,19 +66,11 @@ public class Patient {
         this.condition = condition;
     }
 
-    public String getRecruitment() {
-        return recruitment;
+    public String getRecruitmentDate() {
+        return recruitmentDate;
     }
 
-    public void setRecruitment(String recruitment) {
-        this.recruitment = recruitment;
-    }
-
-    public Study getStudy() {
-        return study;
-    }
-
-    public void setStudy(Study study) {
-        this.study = study;
+    public void setRecruitmentDate(String recruitmentDate) {
+        this.recruitmentDate = recruitmentDate;
     }
 }

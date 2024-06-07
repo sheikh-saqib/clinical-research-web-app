@@ -1,0 +1,114 @@
+[
+  {
+    "patientID": "001",
+    "name": "John Smith",
+    "age": 45,
+    "gender": "Male",
+    "condition": "Hypertension",
+    "recruitmentDate": "2024-05-05"
+  },
+  {
+    "patientID": "002",
+    "name": "Mary Johnson",
+    "age": 32,
+    "gender": "Female",
+    "condition": "Diabetes",
+    "recruitmentDate": "2024-05-16"
+  },
+  {
+    "patientID": "003",
+    "name": "Robert Brown",
+    "age": 55,
+    "gender": "Male",
+    "condition": "Asthma",
+    "recruitmentDate": "2024-05-18"
+  },
+  {
+    "patientID": "004",
+    "name": "Sarah Davis",
+    "age": 28,
+    "gender": "Female",
+    "condition": "Migraine",
+    "recruitmentDate": "2024-05-19"
+  },
+  {
+    "patientID": "006",
+    "name": "Jane Johnson",
+    "age": 32,
+    "gender": "Female",
+    "condition": "Diabetes",
+    "recruitmentDate": "2024-05-01"
+  },
+  {
+    "patientID": "005",
+    "name": "William Clark",
+    "age": 50,
+    "gender": "Male",
+    "condition": "Arthritis",
+    "recruitmentDate": "2024-05-20"
+  },
+  {
+    "patientID": "009",
+    "name": "John Gold",
+    "age": 44,
+    "gender": "Male",
+    "condition": "Hypertension",
+    "recruitmentDate": "2024-05-05"
+  },
+  {
+    "patientID": "007",
+    "name": "Mary Holland",
+    "age": 31,
+    "gender": "Female",
+    "condition": "Diabetes",
+    "recruitmentDate": "2024-05-16"
+  },
+  {
+    "patientID": "010",
+    "name": "Sean Brown",
+    "age": 52,
+    "gender": "Male",
+    "condition": "Asthma",
+    "recruitmentDate": "2024-05-18"
+  },
+  {
+    "patientID": "008",
+    "name": "Charlotte Davis",
+    "age": 28,
+    "gender": "Female",
+    "condition": "Migraine",
+    "recruitmentDate": "2024-05-19"
+  },
+  {
+    "patientID": "006",
+    "name": "Laura Johnson",
+    "age": 33,
+    "gender": "Female",
+    "condition": "Diabetes",
+    "recruitmentDate": "2024-05-01"
+  },
+  {
+    "patientID": "005",
+    "name": "William Shark",
+    "age": 49,
+    "gender": "Male",
+    "condition": "Arthritis",
+    "recruitmentDate": "2024-05-20"
+  },
+  {
+    "patientID": "013",
+    "name": "Teju Face",
+    "age": 20,
+    "gender": "Male",
+    "condition": "Arthritis",
+    "recruitmentDate": "2024-05-20"
+  },
+  {
+    "patientID": "014",
+    "name": "Uzoma Bode",
+    "age": 54,
+    "gender": "Female",
+    "condition": "Arthritis",
+    "recruitmentDate": "2024-05-20"
+  }
+]
