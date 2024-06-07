@@ -3,18 +3,18 @@ package com.example.clinical_research.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.clinical_research.Repos.StudyRepository;
+// import com.example.clinical_research.Repos.StudyRepository;
 import com.example.clinical_research.interfaces.IStudy;
 import com.example.clinical_research.model.Study;
 
 @Service
 public class StudyService extends GenericService<Study, Long> implements IStudy {
 
-    @Autowired
-    private StudyRepository studyRepository;
+    // @Autowired
+    // private StudyRepository studyRepository;
 
     @Override
     public Study saveStudy(Study study) {
