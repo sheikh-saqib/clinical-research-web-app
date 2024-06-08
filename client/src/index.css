@@ -17,3 +17,7 @@
 .required{
   color: red;
 }
+
+.nav{
+  margin-left: 20px !important;
+}

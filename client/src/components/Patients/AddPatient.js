@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 import patientService from '../../services/PatientService';
 
 const AddPatient = () => {
+
+    const today = new Date().toISOString().split('T')[0];
     const navigate = useNavigate();
     const [patient, setPatient] = useState({
         name: '',
@@ -33,8 +35,6 @@ const AddPatient = () => {
             Swal.fire('Error', 'Failed to add patient. Please try again later.', 'error');
         }
     };
-
-    const today = new Date().toISOString().split('T')[0];
 
     return (
         <div className="container">
