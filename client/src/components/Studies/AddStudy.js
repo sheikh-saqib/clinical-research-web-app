@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { BASE_URL } from '../../api/api';
 import Swal from 'sweetalert2';
+import studyService from '../../services/StudyService';
 
 const AddStudy = () => {
     const navigate = useNavigate();
@@ -24,12 +23,13 @@ const AddStudy = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            await axios.post(`${BASE_URL}/studies`, study);
+            await studyService.create(study);
             Swal.fire('Success', 'Study added successfully', 'success').then(() => {
                 navigate('/studies');
             });
         } catch (error) {
             console.error('Error adding study:', error);
+            Swal.fire('Error', 'Failed to add study. Please try again later.', 'error');
         }
     };
 

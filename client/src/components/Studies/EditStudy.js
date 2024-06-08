@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { BASE_URL } from '../../api/api';
 import { useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import studyService from '../../services/StudyService';
 
 const EditStudy = () => {
     const { studyId } = useParams();
@@ -20,8 +19,8 @@ const EditStudy = () => {
 
     const fetchStudy = async () => {
         try {
-            const response = await axios.get(`${BASE_URL}/studies/${studyId}`);
-            setStudy(response.data);
+            const fetchedStudy = await studyService.getById(studyId);
+            setStudy(fetchedStudy);
         } catch (error) {
             console.error('Error fetching study:', error);
         }
@@ -38,7 +37,7 @@ const EditStudy = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            await axios.put(`${BASE_URL}/studies/${studyId}`, study);
+            await studyService.update(studyId, study);
             Swal.fire({
                 icon: 'success',
                 title: 'Success!',
@@ -51,6 +50,7 @@ const EditStudy = () => {
             });
         } catch (error) {
             console.error('Error updating study:', error);
+            Swal.fire('Error', 'Failed to update study. Please try again later.', 'error');
         }
     };
 

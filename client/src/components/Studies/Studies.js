@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { BASE_URL } from '../../api/api';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { ClipLoader } from 'react-spinners'; // Importing the loader
+import ClipLoader from 'react-spinners/ClipLoader';
+import studyService from '../../services/StudyService';
 
 const Studies = () => {
     const [studies, setStudies] = useState([]);
-    const [loading, setLoading] = useState(true); // Loading state
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchStudies();
@@ -16,12 +15,12 @@ const Studies = () => {
 
     const fetchStudies = async () => {
         try {
-            const response = await axios.get(`${BASE_URL}/studies`);
-            setStudies(response.data);
+            const data = await studyService.getAll();
+            setStudies(data);
         } catch (error) {
             console.error('Error fetching studies:', error);
         } finally {
-            setLoading(false); // Set loading to false after data is fetched
+            setLoading(false);
         }
     };
 
@@ -37,7 +36,7 @@ const Studies = () => {
             });
 
             if (result.isConfirmed) {
-                await axios.delete(`${BASE_URL}/studies/${studyId}`);
+                await studyService.delete(studyId);
                 setStudies(studies.filter(study => study.studyId !== studyId));
                 Swal.fire('Deleted!', 'The study has been deleted.', 'success');
             } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -56,7 +55,7 @@ const Studies = () => {
                 <Button variant="success" className="mb-3">Add Study</Button>
             </Link>
             <div>
-                {loading ? ( // Conditional rendering based on loading state
+                {loading ? (
                     <div className="text-center">
                         <ClipLoader size={50} color={"#123abc"} loading={loading} />
                     </div>

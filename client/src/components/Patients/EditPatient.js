@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { BASE_URL } from '../../api/api';
 import Swal from 'sweetalert2';
+import patientService from '../../services/PatientService';
 
 const EditPatient = () => {
     const { id } = useParams();
@@ -21,8 +20,8 @@ const EditPatient = () => {
 
     const fetchPatient = async () => {
         try {
-            const response = await axios.get(`${BASE_URL}/patients/${id}`);
-            setPatient(response.data);
+            const data = await patientService.getById(id);
+            setPatient(data);
         } catch (error) {
             console.error('Error fetching patient:', error);
         }
@@ -39,8 +38,7 @@ const EditPatient = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            await axios.put(`${BASE_URL}/patients/${id}`, patient);
-            // Optionally, show success message
+            await patientService.update(id, patient);
             Swal.fire({
                 icon: 'success',
                 title: 'Success!',
@@ -56,7 +54,6 @@ const EditPatient = () => {
         }
     };
 
-    // Get today's date in yyyy-mm-dd format
     const today = new Date().toISOString().split('T')[0];
 
     return (
@@ -64,15 +61,15 @@ const EditPatient = () => {
             <h2>Edit Patient</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                <label>Name <span className="required">*</span></label>
+                    <label>Name <span className="required">*</span></label>
                     <input type="text" name="name" value={patient.name} onChange={handleChange} className="form-control" required/>
                 </div>
                 <div className="form-group">
-                <label>Age <span className="required">*</span></label>
+                    <label>Age <span className="required">*</span></label>
                     <input type="number" name="age" value={patient.age} onChange={handleChange} className="form-control" required/>
                 </div>
                 <div className="form-group">
-                <label>Gender <span className="required">*</span></label>
+                    <label>Gender <span className="required">*</span></label>
                     <select name="gender" value={patient.gender} onChange={handleChange} className="form-control" required>
                         <option value="" disabled>Please select one…</option>
                         <option value="Female">Female</option>
@@ -83,11 +80,11 @@ const EditPatient = () => {
                     </select>
                 </div>
                 <div className="form-group">
-                <label>Condition <span className="required">*</span></label>
+                    <label>Condition <span className="required">*</span></label>
                     <input type="text" name="condition" value={patient.condition} onChange={handleChange} className="form-control" required/>
                 </div>
                 <div className="form-group">
-                <label>Recruitment Date <span className="required">*</span></label>
+                    <label>Recruitment Date <span className="required">*</span></label>
                     <input 
                         type="date" 
                         name="recruitmentDate" 

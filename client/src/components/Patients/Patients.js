@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { BASE_URL } from '../../api/api';
 import Button from 'react-bootstrap/Button';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
-import { ClipLoader } from 'react-spinners'; // Importing the loader
+import ClipLoader from 'react-spinners/ClipLoader';
+import patientService from '../../services/PatientService';
 
 const Patients = () => {
     const [patients, setPatients] = useState([]);
-    const [loading, setLoading] = useState(true); // Loading state
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchPatients();
@@ -16,15 +15,15 @@ const Patients = () => {
 
     const fetchPatients = async () => {
         try {
-            const response = await axios.get(`${BASE_URL}/patients`);
-            const sortedPatients = response.data.sort((a, b) => {
+            const data = await patientService.getAll();
+            const sortedPatients = data.sort((a, b) => {
                 return new Date(a.recruitmentDate) - new Date(b.recruitmentDate);
             });
             setPatients(sortedPatients);
         } catch (error) {
             console.error('Error fetching patients:', error);
         } finally {
-            setLoading(false); // Set loading to false after data is fetched
+            setLoading(false);
         }
     };
 
@@ -40,7 +39,7 @@ const Patients = () => {
             });
 
             if (result.isConfirmed) {
-                await axios.delete(`${BASE_URL}/patients/${id}`);
+                await patientService.delete(id);
                 setPatients(patients.filter(patient => patient.id !== id));
                 Swal.fire('Deleted!', 'The patient has been deleted.', 'success');
             } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -59,9 +58,9 @@ const Patients = () => {
                 <Button variant="success" className="mb-3">Add Patient</Button>
             </Link>
             <div>
-                {loading ? ( 
+                {loading ? (
                     <div className="text-center">
-                        <ClipLoader size={50} loading={loading} />
+                        <ClipLoader size={50} color={"#123abc"} loading={loading} />
                     </div>
                 ) : (
                     <table className="table table-striped table-hover">
