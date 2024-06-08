@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { BASE_URL } from '../api/api';
+import { BASE_URL } from '../../api/api';
 import Swal from 'sweetalert2';
 
 const AddPatient = () => {
@@ -42,23 +42,30 @@ const AddPatient = () => {
             <h2>Add Patient</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label>Name:</label>
-                    <input type="text" name="name" value={patient.name} onChange={handleChange} className="form-control" />
+                <label>Name <span style={{ color: 'red' }}>*</span></label>
+                    <input type="text" name="name" value={patient.name} onChange={handleChange} className="form-control" required />
                 </div>
                 <div className="form-group">
-                    <label>Age:</label>
-                    <input type="number" name="age" value={patient.age} onChange={handleChange} className="form-control" />
+                <label>Age <span style={{ color: 'red' }}>*</span></label>
+                    <input type="number" name="age" value={patient.age} onChange={handleChange} className="form-control" required/>
                 </div>
                 <div className="form-group">
-                    <label>Gender:</label>
-                    <input type="text" name="gender" value={patient.gender} onChange={handleChange} className="form-control" />
+                <label>Gender <span style={{ color: 'red' }}>*</span></label>
+                    <select name="gender" value={patient.gender} onChange={handleChange} className="form-control" required>
+                        <option value="" disabled>Please select one…</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Non-binary">Non-Binary</option>
+                        <option value="Other">Other</option>
+                        <option value="Prefer not to answer">Prefer not to answer</option>
+                    </select>
                 </div>
                 <div className="form-group">
-                    <label>Condition:</label>
-                    <input type="text" name="condition" value={patient.condition} onChange={handleChange} className="form-control" />
+                <label>Condition <span style={{ color: 'red' }}>*</span></label>
+                    <input type="text" name="condition" value={patient.condition} onChange={handleChange} className="form-control" required />
                 </div>
                 <div className="form-group">
-                    <label>Recruitment Date:</label>
+                <label>Recruitment Date <span style={{ color: 'red' }}>*</span></label>
                     <input 
                         type="date" 
                         name="recruitmentDate" 
@@ -66,9 +73,10 @@ const AddPatient = () => {
                         onChange={handleChange} 
                         className="form-control"
                         max={today} // Block future dates
+                        required
                     />
                 </div>
-                <button type="submit" className="btn btn-primary">Add Patient</button>
+                <button type="submit" className="btn btn-primary mt-3">Add Patient</button>
             </form>
         </div>
     );

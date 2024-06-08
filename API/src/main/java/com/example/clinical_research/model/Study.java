@@ -1,11 +1,14 @@
 package com.example.clinical_research.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Study {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studyId;
 
     private String title;

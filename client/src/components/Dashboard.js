@@ -3,11 +3,11 @@ import axios from 'axios';
 import { BASE_URL } from '../api/api';
 import Button from 'react-bootstrap/Button';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+
+
 const Dashboard = () => {
     const [patients, setPatients] = useState([]);
-    const navigate = useNavigate();
     useEffect(() => {
         fetchPatients();
     }, []);
@@ -22,9 +22,6 @@ const Dashboard = () => {
         } catch (error) {
             console.error('Error fetching patients:', error);
         }
-    };
-    const handleAddPatient = () => {
-        navigate('/add-patient'); // Adjust the path as needed
     };
 
     const handleDelete = async (id) => {
@@ -58,20 +55,20 @@ const Dashboard = () => {
 
     return (
         <div className="container">
-            <h2>Patients</h2>
-            <Button variant="success" className="mb-3" onClick={handleAddPatient}>Add Patient</Button>
-
+            <h2>Patient Details</h2>
+            <Link to="/add-patient">
+                    <Button variant="success" className="mb-3">Add Patient</Button>
+                </Link>
             <div>
-            <table class="table table-striped table-hover">
+            <table className="table table-striped table-hover">
                 <thead className="thead-dark">
                     <tr>
-                        <th className="border">Patient ID</th>
+                        <th className="border">PatientID</th>
                         <th className="border">Name</th>
                         <th className="border">Age</th>
                         <th className="border" >Gender</th>
                         <th className="border">Condition</th>
                         <th className="border">Recruitment Date</th>
-                        {/* <th>Study ID</th> */}
                         <th  colSpan={2} className="text-center border">
               Actions
             </th>
@@ -80,7 +77,7 @@ const Dashboard = () => {
                 <tbody>
                     {patients.map(patient => (
                         <tr key={patient.id}>
-                            <td className="border">{patient.patientID}</td>
+                            <td className="border bold">{patient.patientID}</td>
                             <td className="border">{patient.name}</td>
                             <td className="border">{patient.age}</td>
                             <td className="border">{patient.gender}</td>

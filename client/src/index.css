@@ -9,3 +9,7 @@
 .actions-column {
   border-right: none !important;
 }
+
+.bold {
+  font-weight: bold;
+}
