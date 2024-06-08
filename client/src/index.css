@@ -1,0 +1,11 @@
+.edit-button {
+    margin-right: 8px;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.actions-column {
+  border-right: none !important;
+}

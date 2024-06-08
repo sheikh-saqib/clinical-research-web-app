@@ -1,12 +1,17 @@
 package com.example.clinical_research.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Patient {
     @Id
-    private Long patientID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; // Auto-incremented field
+
+    private String patientID; // Unique patient identifier
     private String name;
     private int age;
     private String gender;
@@ -17,7 +22,8 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(String name, int age, String gender, String condition, String recruitmentDate) {
+    public Patient(String patientID, String name, int age, String gender, String condition, String recruitmentDate) {
+        this.patientID = patientID;
         this.name = name;
         this.age = age;
         this.gender = gender;
@@ -26,11 +32,19 @@ public class Patient {
     }
 
     // Getters and Setters
-    public Long getPatientID() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPatientID() {
         return patientID;
     }
 
-    public void setPatientID(Long patientID) {
+    public void setPatientID(String patientID) {
         this.patientID = patientID;
     }
 
