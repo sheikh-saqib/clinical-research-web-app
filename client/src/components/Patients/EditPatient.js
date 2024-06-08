@@ -45,7 +45,7 @@ const EditPatient = () => {
                 icon: 'success',
                 title: 'Success!',
                 text: 'Patient details updated successfully!',
-                confirmButtonText: 'Go to Dashboard'
+                confirmButtonText: 'Go to Home Page'
             }).then((result) => {
                 if (result.isConfirmed) {
                     navigate('/');
@@ -64,15 +64,15 @@ const EditPatient = () => {
             <h2>Edit Patient</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                <label>Name <span style={{ color: 'red' }}>*</span></label>
+                <label>Name <span className="required">*</span></label>
                     <input type="text" name="name" value={patient.name} onChange={handleChange} className="form-control" required/>
                 </div>
                 <div className="form-group">
-                <label>Age <span style={{ color: 'red' }}>*</span></label>
+                <label>Age <span className="required">*</span></label>
                     <input type="number" name="age" value={patient.age} onChange={handleChange} className="form-control" required/>
                 </div>
                 <div className="form-group">
-                <label>Gender <span style={{ color: 'red' }}>*</span></label>
+                <label>Gender <span className="required">*</span></label>
                     <select name="gender" value={patient.gender} onChange={handleChange} className="form-control" required>
                         <option value="" disabled>Please select one…</option>
                         <option value="Female">Female</option>
@@ -83,11 +83,11 @@ const EditPatient = () => {
                     </select>
                 </div>
                 <div className="form-group">
-                <label>Condition <span style={{ color: 'red' }}>*</span></label>
+                <label>Condition <span className="required">*</span></label>
                     <input type="text" name="condition" value={patient.condition} onChange={handleChange} className="form-control" required/>
                 </div>
                 <div className="form-group">
-                <label>Recruitment Date <span style={{ color: 'red' }}>*</span></label>
+                <label>Recruitment Date <span className="required">*</span></label>
                     <input 
                         type="date" 
                         name="recruitmentDate" 

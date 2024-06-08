@@ -38,19 +38,19 @@ const AddStudy = () => {
             <h2>Add Study</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label>Title <span style={{ color: 'red' }}>*</span></label>
+                    <label>Title <span className="required">*</span></label>
                     <input type="text" name="title" value={study.title} onChange={handleChange} className="form-control" required />
                 </div>
                 <div className="form-group">
-                    <label>Therapeutics <span style={{ color: 'red' }}>*</span></label>
+                    <label>Therapeutics <span className="required">*</span></label>
                     <input type="text" name="therapeutics" value={study.therapeutics} onChange={handleChange} className="form-control" required />
                 </div>
                 <div className="form-group">
-                    <label>Description <span style={{ color: 'red' }}>*</span></label>
+                    <label>Description <span className="required">*</span></label>
                     <textarea name="description" value={study.description} onChange={handleChange} className="form-control" required />
                 </div>
                 <div className="form-group">
-                    <label>Status <span style={{ color: 'red' }}>*</span></label>
+                    <label>Status <span className="required">*</span></label>
                     <select name="status" value={study.status} onChange={handleChange} className="form-control" required>
                         <option value="" disabled>Please select</option>
                         <option value="Recruiting">Recruiting</option>
