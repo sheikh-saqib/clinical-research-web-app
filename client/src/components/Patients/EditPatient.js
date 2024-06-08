@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import patientService from '../../services/PatientService';
 
 const EditPatient = () => {
+    const today = new Date().toISOString().split('T')[0];
     const { id } = useParams();
     const navigate = useNavigate();
     const [patient, setPatient] = useState({
@@ -53,8 +54,6 @@ const EditPatient = () => {
             console.error('Error updating patient:', error);
         }
     };
-
-    const today = new Date().toISOString().split('T')[0];
 
     return (
         <div className="container">

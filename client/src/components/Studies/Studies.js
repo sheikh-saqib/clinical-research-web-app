@@ -57,7 +57,7 @@ const Studies = () => {
             <div>
                 {loading ? (
                     <div className="text-center">
-                        <ClipLoader size={50} color={"#123abc"} loading={loading} />
+                        <ClipLoader size={50} loading={loading} />
                     </div>
                 ) : (
                     <table className="table table-striped table-hover">
