@@ -12,9 +12,9 @@
 	<artifactId>clinical-research</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>clinical-research</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Project for Clinical Research</description>
 	<properties>
-		<java.version>22</java.version>
+		<java.version>21</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
