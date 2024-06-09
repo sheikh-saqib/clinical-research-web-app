@@ -43,7 +43,16 @@ const StudyService = {
             console.error('Error deleting study:', error);
             throw error;
         }
-    }
+    },
+    fetchRecruitingStudies: async () => {
+        try {
+            const response = await axios.get(`${BASE_URL}/studies/recruiting`);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching recruiting studies:', error);
+            throw error;
+        }
+    },
 };
 
 export default StudyService;

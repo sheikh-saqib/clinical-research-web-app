@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import patientService from '../../services/PatientService';
+import studyService from '../../services/StudyService';
 
 const EditPatient = () => {
     const today = new Date().toISOString().split('T')[0];
@@ -12,19 +13,41 @@ const EditPatient = () => {
         age: '',
         gender: '',
         condition: '',
-        recruitmentDate: ''
+        recruitmentDate: '',
+        selectedStudyId: '' // New state for selected study
     });
+    const [recruitingStudies, setRecruitingStudies] = useState([]); // State for recruiting studies
 
     useEffect(() => {
         fetchPatient();
+        fetchRecruitingStudies(); // Fetch recruiting studies when the component mounts
     }, []);
 
     const fetchPatient = async () => {
         try {
             const data = await patientService.getById(id);
-            setPatient(data);
+            console.log(data);
+            // Convert the PatientID from string to integer
+            const selectedStudyId = parseInt(data.patientID);
+            console.log(selectedStudyId)
+            // Update the patient state with the converted PatientID
+            setPatient(prevState => ({
+                ...prevState,
+                ...data,
+                selectedStudyId
+            }));
         } catch (error) {
             console.error('Error fetching patient:', error);
+        }
+    };
+    
+
+    const fetchRecruitingStudies = async () => {
+        try {
+            const data = await studyService.fetchRecruitingStudies(); // Fetch recruiting studies from the backend
+            setRecruitingStudies(data);
+        } catch (error) {
+            console.error('Error fetching recruiting studies:', error);
         }
     };
 
@@ -39,7 +62,29 @@ const EditPatient = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            await patientService.update(id, patient);
+            // Find the study object corresponding to the selected study ID
+            console.log(patient.selectedStudyId)
+            console.log(recruitingStudies)
+            const selectedStudyId = parseInt(patient.selectedStudyId); // Convert to number explicitly
+            const selectedStudy = recruitingStudies.find(study => study.studyId === selectedStudyId);
+            console.log(selectedStudy)
+            if (!selectedStudy) {
+                throw new Error('Selected study not found');
+            }
+            // Pad the study ID to three digits and convert it to a string
+            const patientID = String(selectedStudy.studyId).padStart(3, '0');
+            // Construct the patientData object with updated patient details
+            const patientData = {
+                name: patient.name,
+                age: patient.age,
+                gender: patient.gender,
+                condition: patient.condition,
+                recruitmentDate: patient.recruitmentDate,
+                patientID: patientID,
+                id:id
+            };
+            // Update patient details
+            await patientService.update(id, patientData);
             Swal.fire({
                 icon: 'success',
                 title: 'Success!',
@@ -83,7 +128,7 @@ const EditPatient = () => {
                     <input type="text" name="condition" value={patient.condition} onChange={handleChange} className="form-control" required/>
                 </div>
                 <div className="form-group">
-                    <label>Recruitment Date <span className="required">*</span></label>
+                    <label>Recruitment Date<span className="required">*</span></label>
                     <input 
                         type="date" 
                         name="recruitmentDate" 
@@ -93,6 +138,15 @@ const EditPatient = () => {
                         max={today}
                         required
                     />
+                </div>
+                <div className="form-group">
+                    <label>Avaliable Studies <span className="required">*</span></label>
+                    <select name="selectedStudyId" value={patient.selectedStudyId} onChange={handleChange} className="form-control" required>
+                        <option value="" disabled>Select a study...</option>
+                        {recruitingStudies.map(study => (
+                            <option key={study.studyId} value={study.studyId}>{study.title}</option>
+                        ))}
+                    </select>
                 </div>
                 <button type="submit" className="btn btn-primary mt-3">Save Changes</button>
             </form>

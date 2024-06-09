@@ -55,7 +55,6 @@ public class StudyController {
         Study study = studyService.getStudyById(id)
                 .orElseThrow(() -> new RuntimeException("Study not found with id: " + id));
 
-        // Apply partial updates
         updates.forEach((key, value) -> {
             switch (key) {
                 case "title":
@@ -74,8 +73,11 @@ public class StudyController {
                     throw new IllegalArgumentException("Invalid field: " + key);
             }
         });
-
-        // Save the updated study
         return studyService.updateStudy(id, study);
+    }
+
+    @GetMapping("/recruiting")
+    public List<Study> getRecruitingStudies() {
+        return studyService.getRecruitingStudies();
     }
 }

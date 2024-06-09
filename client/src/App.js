@@ -7,6 +7,7 @@ import Studies from './components/Studies/Studies';
 import EditStudy from './components/Studies/EditStudy';
 import AddStudy from './components/Studies/AddStudy';
 import Navbar from './components/Navbar/Navbar';
+import Dashboard from './components/Dashboard/Dashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -15,12 +16,13 @@ function App() {
       <div>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Patients />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/edit/:id" element={<EditPatient />} />
           <Route path="/add-patient" element={<AddPatient />} />
           <Route path="/studies" element={<Studies />} />
           <Route path="/edit-study/:studyId" element={<EditStudy />} />
           <Route path="/add-study" element={<AddStudy />} />
+          <Route path="/patients" element={<Patients />} />
         </Routes>
       </div>
     </Router>

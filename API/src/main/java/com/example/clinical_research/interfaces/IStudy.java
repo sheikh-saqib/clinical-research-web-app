@@ -16,4 +16,6 @@ public interface IStudy {
     Study updateStudy(Long id, Study studyDetails);
 
     void deleteStudy(Long id);
+
+    List<Study> getRecruitingStudies();
 }

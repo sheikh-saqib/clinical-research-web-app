@@ -13,14 +13,14 @@ public class ClinicalResearchApplication {
 		SpringApplication.run(ClinicalResearchApplication.class, args);
 	}
 
-	@Bean
-	public ConfigurableServletWebServerFactory servletContainer() {
-		TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
-		factory.addConnectorCustomizers(connector -> {
-			connector.setPort(8080);
-			connector.setSecure(true);
-			connector.setScheme("https");
-		});
-		return factory;
-	}
+	// @Bean
+	// public ConfigurableServletWebServerFactory servletContainer() {
+	// TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
+	// factory.addConnectorCustomizers(connector -> {
+	// connector.setPort(8080);
+	// connector.setSecure(true);
+	// connector.setScheme("https");
+	// });
+	// return factory;
+	// }
 }

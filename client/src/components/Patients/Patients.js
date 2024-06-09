@@ -16,10 +16,7 @@ const Patients = () => {
     const fetchPatients = async () => {
         try {
             const data = await patientService.getAll();
-            const sortedPatients = data.sort((a, b) => {
-                return new Date(a.recruitmentDate) - new Date(b.recruitmentDate);
-            });
-            setPatients(sortedPatients);
+            setPatients(data);
         } catch (error) {
             console.error('Error fetching patients:', error);
         } finally {

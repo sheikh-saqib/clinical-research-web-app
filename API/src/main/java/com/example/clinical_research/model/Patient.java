@@ -9,16 +9,15 @@ import jakarta.persistence.Id;
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Auto-incremented field
+    private Long id;
 
-    private String patientID; // Unique patient identifier
+    private String patientID;
     private String name;
     private int age;
     private String gender;
     private String condition;
     private String recruitmentDate;
 
-    // Constructors
     public Patient() {
     }
 

@@ -63,12 +63,12 @@ const Studies = () => {
                     <table className="table table-striped table-hover">
                         <thead className="thead-dark">
                             <tr>
-                                <th className="border">StudyID</th>
-                                <th className="border">Title</th>
-                                <th className="border">Therapeutics</th>
-                                <th className="border">Description</th>
-                                <th className="border">Status</th>
-                                <th colSpan={2} className="text-center border">Actions</th>
+                                <th className="border text-center align-middle">StudyID</th>
+                                <th className="border text-center align-middle">Title</th>
+                                <th className="border text-center align-middle">Therapeutics</th>
+                                <th className="border text-center align-middle">Description</th>
+                                <th className="border text-center align-middle">Status</th>
+                                <th colSpan={2} className="text-center align-middle border">Actions</th>
                             </tr>
                         </thead>
                         <tbody>

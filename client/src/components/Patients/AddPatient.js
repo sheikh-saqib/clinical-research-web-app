@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import patientService from '../../services/PatientService';
+import studyService from '../../services/StudyService';
 
 const AddPatient = () => {
-
     const today = new Date().toISOString().split('T')[0];
     const navigate = useNavigate();
     const [patient, setPatient] = useState({
@@ -12,8 +12,26 @@ const AddPatient = () => {
         age: '',
         gender: '',
         condition: '',
-        recruitmentDate: ''
+        recruitmentDate: '',
+        selectedStudyTitle: '', 
+        recruitingStudies: []
     });
+
+    useEffect(() => {
+        fetchRecruitingStudies();
+    }, []);
+
+    const fetchRecruitingStudies = async () => {
+        try {
+            const data = await studyService.fetchRecruitingStudies(); // Fetch recruiting studies from the backend
+            setPatient(prevState => ({
+                ...prevState,
+                recruitingStudies: data
+            }));
+        } catch (error) {
+            console.error('Error fetching recruiting studies:', error);
+        }
+    };
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -26,7 +44,20 @@ const AddPatient = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            await patientService.create(patient);
+            // Find the study object corresponding to the selected study title
+            const selectedStudy = patient.recruitingStudies.find(study => study.title === patient.selectedStudyTitle);
+            const patientID = String(selectedStudy.studyId).padStart(3, '0');
+
+            const patientData = {
+                name: patient.name,
+                age: patient.age,
+                gender: patient.gender,
+                condition: patient.condition,
+                recruitmentDate: patient.recruitmentDate,
+                patientID: patientID
+            };
+            // Make the save call
+            await patientService.create(patientData);
             Swal.fire('Success', 'Patient added successfully', 'success').then(() => {
                 navigate('/');
             });
@@ -74,6 +105,15 @@ const AddPatient = () => {
                         max={today}
                         required
                     />
+                </div>
+                <div className="form-group">
+                    <label>Available Studies <span className="required">*</span></label>
+                    <select name="selectedStudyTitle" value={patient.selectedStudyTitle} onChange={handleChange} className="form-control" required>
+                        <option value="" disabled>Select a study...</option>
+                        {patient.recruitingStudies.map(study => (
+    <option key={study.studyId} value={study.title}>{study.title}</option>
+))}
+                    </select>
                 </div>
                 <button type="submit" className="btn btn-primary mt-3">Add Patient</button>
             </form>
