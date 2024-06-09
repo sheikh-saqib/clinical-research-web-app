@@ -51,9 +51,9 @@ const Patients = () => {
     return (
         <div className="container">
             <h2>Patient Details</h2>
-            <Link to="/add-patient">
+            {/* <Link to="/add-patient">
                 <Button variant="success" className="mb-3">Add Patient</Button>
-            </Link>
+            </Link> */}
             <div>
                 {loading ? (
                     <div className="text-center">

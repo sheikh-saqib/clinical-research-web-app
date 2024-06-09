@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { Button, Modal } from 'react-bootstrap';
 import ClipLoader from 'react-spinners/ClipLoader';
 import dashboardService from '../../services/DashboardService';
@@ -11,7 +11,8 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const [selectedPatient, setSelectedPatient] = useState(null);
-
+    const navigate = useNavigate();
+    
     useEffect(() => {
         fetchPatientStudies();
     }, []);
@@ -39,10 +40,7 @@ const Dashboard = () => {
             });
 
             if (result.isConfirmed) {
-                // Call the delete method from the patientService to remove the patient
                 await patientService.delete(patientId);
-
-                // Update the state to remove the deleted patient
                 setPatientStudies(patientStudies.filter(patientStudy => patientStudy.id !== patientId));
                 Swal.fire('Deleted!', 'The patient has been deleted.', 'success');
             } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -70,12 +68,26 @@ const Dashboard = () => {
         setSelectedPatient(null);
     };
 
+    const handleRecruitNewPatient = () => {
+        const hasRecruitingStudies = patientStudies.some(patientStudy => patientStudy.studyStatus === "Recruiting");
+        if (!hasRecruitingStudies) {
+            Swal.fire({
+                icon: 'info',
+                title: 'No Studies Available',
+                text: 'There are currently no studies available for recruitment.',
+                confirmButtonText: 'Okay'
+            });
+        } else {
+            navigate('/add-patient');
+        }
+    };
+
     return (
         <div className="container">
             <h2>Patient Study Details</h2>
-            <Link to="/add-patient">
-                <Button variant="success" className="mb-3">Recruit New Patient</Button>
-            </Link>
+                <Button variant="success" className="mb-3" onClick={handleRecruitNewPatient}>
+                    Recruit New Patient
+                </Button>
             <div>
                 {loading ? (
                     <div className="text-center">
