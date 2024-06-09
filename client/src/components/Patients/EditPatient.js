@@ -14,22 +14,20 @@ const EditPatient = () => {
         gender: '',
         condition: '',
         recruitmentDate: '',
-        selectedStudyId: '' // New state for selected study
+        selectedStudyId: '' 
     });
-    const [recruitingStudies, setRecruitingStudies] = useState([]); // State for recruiting studies
+    const [recruitingStudies, setRecruitingStudies] = useState([]);
 
     useEffect(() => {
         fetchPatient();
-        fetchRecruitingStudies(); // Fetch recruiting studies when the component mounts
+        fetchRecruitingStudies(); 
     }, []);
 
     const fetchPatient = async () => {
         try {
             const data = await patientService.getById(id);
-            console.log(data);
             // Convert the PatientID from string to integer
             const selectedStudyId = parseInt(data.patientID);
-            console.log(selectedStudyId)
             // Update the patient state with the converted PatientID
             setPatient(prevState => ({
                 ...prevState,
@@ -63,38 +61,39 @@ const EditPatient = () => {
         e.preventDefault();
         try {
             // Find the study object corresponding to the selected study ID
-            console.log(patient.selectedStudyId)
-            console.log(recruitingStudies)
             const selectedStudyId = parseInt(patient.selectedStudyId); // Convert to number explicitly
             const selectedStudy = recruitingStudies.find(study => study.studyId === selectedStudyId);
-            console.log(selectedStudy)
             if (!selectedStudy) {
                 throw new Error('Selected study not found');
             }
-            // Pad the study ID to three digits and convert it to a string
-            const patientID = String(selectedStudy.studyId).padStart(3, '0');
-            // Construct the patientData object with updated patient details
-            const patientData = {
-                name: patient.name,
-                age: patient.age,
-                gender: patient.gender,
-                condition: patient.condition,
-                recruitmentDate: patient.recruitmentDate,
-                patientID: patientID,
-                id:id
-            };
-            // Update patient details
-            await patientService.update(id, patientData);
-            Swal.fire({
-                icon: 'success',
-                title: 'Success!',
-                text: 'Patient details updated successfully!',
-                confirmButtonText: 'Go to Home Page'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    navigate('/');
-                }
-            });
+            else {
+                // Pad the study ID to three digits and convert it to a string
+                const patientID = String(selectedStudy.studyId).padStart(3, '0');
+                // Construct the patientData object with updated patient details
+                const patientData = {
+                    name: patient.name,
+                    age: patient.age,
+                    gender: patient.gender,
+                    condition: patient.condition,
+                    recruitmentDate: patient.recruitmentDate,
+                    patientID: patientID,
+                    id:id
+                };
+                // Update patient details
+                await patientService.update(id, patientData);
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'Patient details updated successfully!',
+                    confirmButtonText: 'Go to Home Page'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        navigate('/');
+                    }
+                });
+            }
+            
         } catch (error) {
             console.error('Error updating patient:', error);
         }
@@ -146,8 +145,13 @@ const EditPatient = () => {
                         {recruitingStudies.map(study => (
                             <option key={study.studyId} value={study.studyId}>{study.title}</option>
                         ))}
+                        {/* If selected study ID is not found in the recruiting studies data */}
+                        {!recruitingStudies.some(study => study.studyId === patient.selectedStudyId) && (
+                            <option value={patient.selectedStudyId}>Please select</option>
+                        )}
                     </select>
                 </div>
+
                 <button type="submit" className="btn btn-primary mt-3">Save Changes</button>
             </form>
         </div>

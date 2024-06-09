@@ -22,7 +22,6 @@ const PatientService = {
     },
     create: async (patient) => {
         try {
-            console.log(patient);
             await axios.post(`${BASE_URL}/patients`, patient);
         } catch (error) {
             console.error('Error adding patient:', error);
@@ -31,8 +30,6 @@ const PatientService = {
     },
     update: async (id, patient) => {
         try {
-            console.log(id)
-            console.log(patient)
             await axios.put(`${BASE_URL}/patients/${id}`, patient);
         } catch (error) {
             console.error('Error updating patient:', error);

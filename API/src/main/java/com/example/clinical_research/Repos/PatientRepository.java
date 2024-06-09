@@ -7,5 +7,5 @@ import com.example.clinical_research.model.Patient;
 
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Long> {
-    // Define custom query methods here if needed
+    // We can add custom methods which are non generic
 }
