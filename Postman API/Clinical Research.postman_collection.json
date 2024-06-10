@@ -1,0 +1,350 @@
+{
+	"info": {
+		"_postman_id": "d0087a18-81ca-42a7-8ec9-1170644583ea",
+		"name": "Clinical Research JAVA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17133947"
+	},
+	"item": [
+		{
+			"name": "Patients",
+			"item": [
+				{
+					"name": "Get All Patients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/patients",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patient By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/patients/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"patients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Patient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"patientID\": \"001\",\r\n    \"name\": \"John Smith\",\r\n    \"age\": 45,\r\n    \"gender\": \"Male\",\r\n    \"condition\": \"Hypertension\",\r\n    \"recruitmentDate\": \"2024-05-05\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/patients",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Patient By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" :5,\r\n    \"patientID\": \"001\",\r\n    \"name\": \"John M\",\r\n    \"age\": 24,\r\n    \"gender\": \"Male\",\r\n    \"condition\": \"Hypertension\",\r\n    \"recruitmentDate\": \"2024-05-05\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/patients/5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"patients",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch Patient By Id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"gender\": \"Female\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/patients/5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"patients",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Patient By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/patients/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"patients",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Studies",
+			"item": [
+				{
+					"name": "Get All Studies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/studies",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"studies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Study By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/studies/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"studies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Study",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"AI in Medical Diagnosis\",\r\n    \"therapeutics\": \"Computer Science\",\r\n    \"description\": \"Evaluates the effectiveness of AI in diagnosing medical conditions.\",\r\n    \"status\": \"Withdrawn\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/studies",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"studies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Study By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"studyId\":1,\r\n    \"title\": \"AI in Medical Diagnosis and Health Sciences\",\r\n    \"therapeutics\": \"Computer Science\",\r\n    \"description\": \"Evaluates the effectiveness of AI in diagnosing medical conditions.\",\r\n    \"status\": \"Withdrawn\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/studies/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"studies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch Study By Id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Evaluates the effectiveness of AI in diagnosing medical conditions and health.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/studies/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"studies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Study By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/studies/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"studies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "Get Patient Studies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/dashboard",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"dashboard"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

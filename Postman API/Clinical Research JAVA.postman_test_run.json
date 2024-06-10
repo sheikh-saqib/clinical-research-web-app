@@ -1,0 +1,308 @@
+{
+	"id": "fcffb4de-945a-4b78-96da-9ab8c24b9f59",
+	"name": "Clinical Research JAVA",
+	"timestamp": "2024-06-10T20:05:22.178Z",
+	"collection_id": "17133947-d0087a18-81ca-42a7-8ec9-1170644583ea",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-06-10T20:05:18.982Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "e65baa71-6340-489c-ac7d-7a2067c57e30",
+			"name": "Get All Patients",
+			"url": "http://localhost:8080/api/patients",
+			"time": 336,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				336
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e033191b-3aed-455b-a4e0-41c532ffb93b",
+			"name": "Get Patient By Id",
+			"url": "http://localhost:8080/api/patients/1",
+			"time": 28,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				28
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "0b16aa1c-6f54-4ec7-bb78-0c6a90d91fbe",
+			"name": "Create New Patient",
+			"url": "http://localhost:8080/api/patients",
+			"time": 18,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				18
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e385d15c-95eb-4890-a528-e6ae4dc873f5",
+			"name": "Update Patient By Id",
+			"url": "http://localhost:8080/api/patients/5",
+			"time": 358,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				358
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "c0afd398-80f0-4db0-9f9f-e1e1e0b5dd78",
+			"name": "Patch Patient By Id",
+			"url": "http://localhost:8080/api/patients/5",
+			"time": 17,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				17
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "324e4c0b-1a24-489d-832e-e3501b6ad912",
+			"name": "Delete Patient By Id",
+			"url": "http://localhost:8080/api/patients/2",
+			"time": 20,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				20
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "0b6af15a-c3af-44c8-8a9a-e604fe99d6dc",
+			"name": "Get All Studies",
+			"url": "http://localhost:8080/api/studies",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				14
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "3d1a41f2-6950-4304-896c-75b16a4e7af0",
+			"name": "Get Study By Id",
+			"url": "http://localhost:8080/api/studies/1",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				7
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "511ccd5f-afec-43fa-9dc7-850c808f949f",
+			"name": "Create New Study",
+			"url": "http://localhost:8080/api/studies",
+			"time": 15,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				15
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "3b854cf2-843c-4fe4-a76f-551cd44e90e8",
+			"name": "Update Study By Id",
+			"url": "http://localhost:8080/api/studies/1",
+			"time": 18,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				18
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "0b495383-e40b-4709-95a7-68af8c74eee8",
+			"name": "Patch Study By Id",
+			"url": "http://localhost:8080/api/studies/1",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				7
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "06a7aff6-d318-4803-a44f-2b2569755139",
+			"name": "Delete Study By Id",
+			"url": "http://localhost:8080/api/studies/1",
+			"time": 6,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				6
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "806402fc-403a-473e-8992-0fe22782925c",
+			"name": "Get Patient Studies",
+			"url": "http://localhost:8080/api/dashboard",
+			"time": 20,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				20
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 864,
+	"collection": {
+		"requests": [
+			{
+				"id": "e65baa71-6340-489c-ac7d-7a2067c57e30",
+				"method": "GET"
+			},
+			{
+				"id": "e033191b-3aed-455b-a4e0-41c532ffb93b",
+				"method": "GET"
+			},
+			{
+				"id": "0b16aa1c-6f54-4ec7-bb78-0c6a90d91fbe",
+				"method": "POST"
+			},
+			{
+				"id": "e385d15c-95eb-4890-a528-e6ae4dc873f5",
+				"method": "PUT"
+			},
+			{
+				"id": "c0afd398-80f0-4db0-9f9f-e1e1e0b5dd78",
+				"method": "PATCH"
+			},
+			{
+				"id": "324e4c0b-1a24-489d-832e-e3501b6ad912",
+				"method": "DELETE"
+			},
+			{
+				"id": "0b6af15a-c3af-44c8-8a9a-e604fe99d6dc",
+				"method": "GET"
+			},
+			{
+				"id": "3d1a41f2-6950-4304-896c-75b16a4e7af0",
+				"method": "GET"
+			},
+			{
+				"id": "511ccd5f-afec-43fa-9dc7-850c808f949f",
+				"method": "POST"
+			},
+			{
+				"id": "3b854cf2-843c-4fe4-a76f-551cd44e90e8",
+				"method": "PUT"
+			},
+			{
+				"id": "0b495383-e40b-4709-95a7-68af8c74eee8",
+				"method": "PATCH"
+			},
+			{
+				"id": "06a7aff6-d318-4803-a44f-2b2569755139",
+				"method": "DELETE"
+			},
+			{
+				"id": "806402fc-403a-473e-8992-0fe22782925c",
+				"method": "GET"
+			}
+		]
+	}
+}

@@ -85,7 +85,7 @@ const Dashboard = () => {
 
     return (
         <div className="container">
-            <h2>Patient Study Details</h2>
+            <h2>Clinical Research Recruitment Software</h2>
             <Button variant="success" className="mb-3" onClick={handleRecruitNewPatient}>
                 Recruit New Patient
             </Button>

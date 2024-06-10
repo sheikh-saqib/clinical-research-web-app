@@ -18,7 +18,7 @@ const AddPatient = () => {
     });
 
     useEffect(() => {
-        fetchRecruitingStudies();
+        fetchRecruitingStudies(); 
     }, []);
 
     const fetchRecruitingStudies = async () => {
