@@ -118,74 +118,79 @@ const EditPatient = () => {
         }
     };
 
-    const handleCancel = () => {
-        navigate(-1); // Navigate back one step in the history
-    };
-
     return (
         <div className="container">
             <h2>Edit Patient</h2>
             <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label>Name <span className="required">*</span></label>
-                    <input type="text" name="name" value={patient.name} onChange={handleChange} className="form-control" required />
-                </div>
-                <div className="form-group">
-                    <label>Age <span className="required">*</span></label>
-                    <input type="number" name="age" value={patient.age} onChange={handleChange} className="form-control" required />
-                </div>
-                <div className="form-group">
-                    <label>Gender <span className="required">*</span></label>
-                    <select name="gender" value={patient.gender} onChange={handleChange} className="form-control" required>
-                        <option value="" disabled>Please select one…</option>
-                        <option value="Female">Female</option>
-                        <option value="Male">Male</option>
-                        <option value="Non-binary">Non-Binary</option>
-                        <option value="Other">Other</option>
-                        <option value="Prefer not to answer">Prefer not to answer</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label>Condition <span className="required">*</span></label>
-                    <input type="text" name="condition" value={patient.condition} onChange={handleChange} className="form-control" required />
-                </div>
-                <div className="form-group">
-                    <label>Recruitment Date<span className="required">*</span></label>
-                    <input
-                        type="date"
-                        name="recruitmentDate"
-                        value={patient.recruitmentDate}
-                        onChange={handleChange}
-                        className="form-control"
-                        max={today}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Change Study?</label><br />
-                    <div>
-                        <input
-                            type="radio"
-                            id="changeStudyYes"
-                            name="changeStudy"
-                            value="true"
-                            checked={changeStudy === true}
-                            onChange={handleStudyChange}
-                        />
-                        <label htmlFor="changeStudyYes">Yes</label>
+                <div className="row">
+                    <div className="col-md-6 form-group mb-3">
+                        <label>Name <span className="required">*</span></label>
+                        <input type="text" name="name" value={patient.name} onChange={handleChange} className="form-control" required />
                     </div>
-                    <div>
-                        <input
-                            type="radio"
-                            id="changeStudyNo"
-                            name="changeStudy"
-                            value="false"
-                            checked={changeStudy === false}
-                            onChange={handleStudyChange}
-                        />
-                        <label htmlFor="changeStudyNo">No</label>
+                    <div className="col-md-6 form-group mb-3">
+                        <label>Age <span className="required">*</span></label>
+                        <input type="number" name="age" value={patient.age} onChange={handleChange} className="form-control" required />
                     </div>
                 </div>
+                <div className="row">
+                    <div className="col-md-6 form-group mb-3">
+                        <label>Gender <span className="required">*</span></label>
+                        <select name="gender" value={patient.gender} onChange={handleChange} className="form-control" required>
+                            <option value="" disabled>Please select one…</option>
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Non-binary">Non-Binary</option>
+                            <option value="Other">Other</option>
+                            <option value="Prefer not to answer">Prefer not to answer</option>
+                        </select>
+                    </div>
+                    <div className="col-md-6 form-group mb-3">
+                        <label>Condition <span className="required">*</span></label>
+                        <input type="text" name="condition" value={patient.condition} onChange={handleChange} className="form-control" required />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-6 form-group mb-3">
+                        <label>Recruitment Date<span className="required">*</span></label>
+                        <input
+                            type="date"
+                            name="recruitmentDate"
+                            value={patient.recruitmentDate}
+                            onChange={handleChange}
+                            className="form-control"
+                            max={today}
+                            required
+                        />
+                    </div>
+                    <div className="col-md-6 form-group mb-3 mt-3">
+                        <label>Change Assoicated Study?</label><br />
+                        <div className="form-check form-check-inline">
+                            <input
+                                className="form-check-input"
+                                type="radio"
+                                id="changeStudyYes"
+                                name="changeStudy"
+                                value="true"
+                                checked={changeStudy === true}
+                                onChange={handleStudyChange}
+                            />
+                            <label className="form-check-label" htmlFor="changeStudyYes">Yes</label>
+                        </div>
+                        <div className="form-check form-check-inline">
+                            <input
+                                className="form-check-input"
+                                type="radio"
+                                id="changeStudyNo"
+                                name="changeStudy"
+                                value="false"
+                                checked={changeStudy === false}
+                                onChange={handleStudyChange}
+                            />
+                            <label className="form-check-label" htmlFor="changeStudyNo">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
                 <Collapse in={changeStudy === true}>
                     <div id="study-collapse">
                         {recruitingStudies.length === 0 ? (
@@ -193,20 +198,28 @@ const EditPatient = () => {
                                 There are no available studies left, so the existing study will be assigned.
                             </div>
                         ) : (
-                            <div className="form-group">
-                                <label>Available Studies <span className="required">*</span></label>
-                                <select name="selectedStudyId" value={patient.selectedStudyId} onChange={handleChange} className="form-control" required>
-                                    <option value="" disabled>Select a study...</option>
-                                    {recruitingStudies.map(study => (
-                                        <option key={study.studyId} value={study.studyId}>{study.title}</option>
-                                    ))}
-                                </select>
+                            <div className="row">
+                                <div className="col-md-12 form-group mb-3">
+                                    <label>Available Studies <span className="required">*</span></label>
+                                    <select name="selectedStudyId" value={patient.selectedStudyId} onChange={handleChange} className="form-control" required>
+                                        <option value="" disabled>Select a study...</option>
+                                        {recruitingStudies.map(study => (
+                                            <option key={study.studyId} value={study.studyId}>{study.title}</option>
+                                        ))}
+                                    </select>
+                                </div>
                             </div>
                         )}
                     </div>
                 </Collapse>
-                <button type="submit" className="btn btn-primary mt-3">Save Changes</button>
-                <button type="button" className="btn btn-secondary mt-3 cancelButton" onClick={handleCancel}>Cancel</button>
+                </div>
+                
+                <div className="row">
+                    <div className="col-md-12">
+                        <button type="submit" className="btn btn-primary me-2">Save Changes</button>
+                        <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>Cancel</button>
+                    </div>
+                </div>
             </form>
         </div>
     );

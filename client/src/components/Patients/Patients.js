@@ -51,57 +51,59 @@ const Patients = () => {
     return (
         <div className="container">
             <h2>Patient Details</h2>
-            {/* <Link to="/add-patient">
-                <Button variant="success" className="mb-3">Add Patient</Button>
-            </Link> */}
-            <div>
-                {loading ? (
-                    <div className="text-center">
-                        <ClipLoader size={50} loading={loading} />
+            <div className="row">
+                <div className="col">
+                    <div>
+                        {loading ? (
+                            <div className="text-center">
+                                <ClipLoader size={50} loading={loading} />
+                            </div>
+                        ) : (
+                            <table className="table table-striped table-hover">
+                                <thead className="thead-dark">
+                                    <tr>
+                                        <th className="border">PatientId</th>
+                                        <th className="border">Name</th>
+                                        <th className="border">Age</th>
+                                        <th className="border">Gender</th>
+                                        <th className="border">Condition</th>
+                                        <th className="border">StudyId</th>
+                                        <th className="border">Recruitment Date</th>
+                                        <th colSpan={2} className="text-center border">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {patients.map(patient => (
+                                        <tr key={patient.id}>
+                                            <td className="border bold">{patient.id}</td>
+                                            <td className="border">{patient.name}</td>
+                                            <td className="border">{patient.age}</td>
+                                            <td className="border">{patient.gender}</td>
+                                            <td className="border">{patient.condition}</td>
+                                            <td className="border bold">{parseInt(patient.patientID)}</td>
+                                            <td className="border">{patient.recruitmentDate}</td>
+                                            <td className="text-right">
+                                                <Link to={`/edit/${patient.id}`} className="btn btn-primary">Edit</Link>
+                                            </td>
+                                            <td>
+                                                <button
+                                                    onClick={() => handleDelete(patient.id)}
+                                                    className="btn btn-danger"
+                                                >
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        )}
                     </div>
-                ) : (
-                    <table className="table table-striped table-hover">
-                        <thead className="thead-dark">
-                            <tr>
-                                <th className="border">PatientId</th>
-                                <th className="border">Name</th>
-                                <th className="border">Age</th>
-                                <th className="border">Gender</th>
-                                <th className="border">Condition</th>
-                                <th className="border">StudyId</th>
-                                <th className="border">Recruitment Date</th>
-                                <th colSpan={2} className="text-center border">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {patients.map(patient => (
-                                <tr key={patient.id}>
-                                    <td className="border bold">{patient.id}</td>
-                                    <td className="border">{patient.name}</td>
-                                    <td className="border">{patient.age}</td>
-                                    <td className="border">{patient.gender}</td>
-                                    <td className="border">{patient.condition}</td>
-                                    <td className="border bold">{parseInt(patient.patientID)}</td>
-                                    <td className="border">{patient.recruitmentDate}</td>
-                                    <td className="text-right">
-                                        <Link to={`/edit/${patient.id}`} className="btn btn-primary">Edit</Link>
-                                    </td>
-                                    <td className="border-right">
-                                        <button
-                                            onClick={() => handleDelete(patient.id)}
-                                            className="btn btn-danger"
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                )}
+                </div>
             </div>
         </div>
     );
+    
 };
 
 export default Patients;

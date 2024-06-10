@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import { Link ,useNavigate} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import ClipLoader from 'react-spinners/ClipLoader';
 import studyService from '../../services/StudyService';
@@ -9,6 +9,7 @@ const Studies = () => {
     const [studies, setStudies] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+
     useEffect(() => {
         fetchStudies();
     }, []);
@@ -52,9 +53,13 @@ const Studies = () => {
     return (
         <div className="container">
             <h2>Study Details</h2>
-            <Link to="/add-study">
-                <Button variant="success" className="mb-3">Add Study</Button>
-            </Link>
+            <div className="row mb-3">
+                <div className="col">
+                    <Link to="/add-study">
+                        <Button variant="success">Add Study</Button>
+                    </Link>
+                </div>
+            </div>
             <div>
                 {loading ? (
                     <div className="text-center">
@@ -99,6 +104,7 @@ const Studies = () => {
             </div>
         </div>
     );
+    
 };
 
 export default Studies;

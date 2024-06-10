@@ -89,51 +89,53 @@ const Dashboard = () => {
             <Button variant="success" className="mb-3" onClick={handleRecruitNewPatient}>
                 Recruit New Patient
             </Button>
-            <div>
-                {loading ? (
-                    <div className="text-center">
-                        <ClipLoader size={50} loading={loading} />
-                    </div>
-                ) : (
-                    <table className="table table-striped table-hover">
-                        <thead className="thead-dark">
-                            <tr>
-                                <th className="border text-center align-middle">Patient Name</th>
-                                <th className="border text-center align-middle">Study Title</th>
-                                <th className="border text-center align-middle">Study Description</th>
-                                <th className="border text-center align-middle">Recruitment Date</th>
-                                <th colSpan={2} className="text-center border align-middle">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {patientStudies.map(patientStudy => (
-                                <tr key={patientStudy.id}>
-                                    <td
-                                        className="border bold"
-                                        style={{ cursor: 'pointer', color: 'blue' }}
-                                        onClick={() => handleShowModal(patientStudy.id)}
-                                    >
-                                        {patientStudy.patientName}
-                                    </td>
-                                    <td className="border">{patientStudy.studyTitle}</td>
-                                    <td className="border">{patientStudy.studyDescription}</td>
-                                    <td className="border">{patientStudy.recruitmentDate}</td>
-                                    <td className="text-right">
-                                        <Link to={`/edit/${patientStudy.id}`} className="btn btn-primary">Edit</Link>
-                                    </td>
-                                    <td className="border-right">
-                                        <button
-                                            onClick={() => handleDelete(patientStudy.id)}
-                                            className="btn btn-danger"
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
+            <div className="row">
+                <div className="col">
+                    {loading ? (
+                        <div className="text-center">
+                            <ClipLoader size={50} loading={loading} />
+                        </div>
+                    ) : (
+                        <table className="table table-striped table-hover">
+                            <thead className="thead-dark">
+                                <tr>
+                                    <th className="border text-center align-middle">Patient Name</th>
+                                    <th className="border text-center align-middle">Study Title</th>
+                                    <th className="border text-center align-middle">Study Description</th>
+                                    <th className="border text-center align-middle">Recruitment Date</th>
+                                    <th colSpan={2} className="text-center border align-middle">Actions</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                )}
+                            </thead>
+                            <tbody>
+                                {patientStudies.map(patientStudy => (
+                                    <tr key={patientStudy.id}>
+                                        <td
+                                            className="border bold"
+                                            style={{ cursor: 'pointer', color: 'blue' }}
+                                            onClick={() => handleShowModal(patientStudy.id)}
+                                        >
+                                            {patientStudy.patientName}
+                                        </td>
+                                        <td className="border">{patientStudy.studyTitle}</td>
+                                        <td className="border">{patientStudy.studyDescription}</td>
+                                        <td className="border">{patientStudy.recruitmentDate}</td>
+                                        <td className="text-right">
+                                            <Link to={`/edit/${patientStudy.id}`} className="btn btn-primary">Edit</Link>
+                                        </td>
+                                        <td className="border-right">
+                                            <button
+                                                onClick={() => handleDelete(patientStudy.id)}
+                                                className="btn btn-danger"
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    )}
+                </div>
             </div>
             {selectedPatient && (
                 <Modal show={showModal} onHide={handleCloseModal}>
@@ -156,6 +158,7 @@ const Dashboard = () => {
             )}
         </div>
     );
+    
 };
 
 export default Dashboard;
