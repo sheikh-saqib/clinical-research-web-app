@@ -5,6 +5,7 @@ import { Button, Modal } from 'react-bootstrap';
 import ClipLoader from 'react-spinners/ClipLoader';
 import dashboardService from '../../services/DashboardService';
 import patientService from '../../services/PatientService';
+import studyService from '../../services/StudyService';
 
 const Dashboard = () => {
     const [patientStudies, setPatientStudies] = useState([]);
@@ -69,19 +70,27 @@ const Dashboard = () => {
         setSelectedPatient(null);
     };
 
-    const handleRecruitNewPatient = () => {
-        const hasRecruitingStudies = patientStudies.some(patientStudy => patientStudy.studyStatus === "Recruiting");
-        if (!hasRecruitingStudies) {
-            Swal.fire({
-                icon: 'info',
-                title: 'No Studies Available',
-                text: 'There are currently no studies available for recruitment.',
-                confirmButtonText: 'Okay'
-            });
-        } else {
-            navigate('/add-patient');
+    const handleRecruitNewPatient = async () => {
+        try {
+            const data = await studyService.fetchRecruitingStudies();
+            const hasRecruitingStudies = data.some(study => study.status === "Recruiting");
+            console.log(hasRecruitingStudies);
+            if (!hasRecruitingStudies) {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'No Studies Available',
+                    text: 'There are currently no studies available for recruitment.',
+                    confirmButtonText: 'Okay'
+                });
+            } else {
+                navigate('/add-patient');
+            }
+        } catch (error) {
+            console.error('Error fetching recruiting studies:', error);
+            Swal.fire('Error', 'Failed to fetch recruiting studies. Please try again later.', 'error');
         }
     };
+    
 
     return (
         <div className="container">
