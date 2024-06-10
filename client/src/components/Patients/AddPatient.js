@@ -30,6 +30,7 @@ const AddPatient = () => {
             }));
         } catch (error) {
             console.error('Error fetching recruiting studies:', error);
+            navigate('/error');
         }
     };
 

@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
 import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import ClipLoader from 'react-spinners/ClipLoader';
 import patientService from '../../services/PatientService';
 
 const Patients = () => {
     const [patients, setPatients] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const navigate = useNavigate();
     useEffect(() => {
         fetchPatients();
     }, []);
@@ -19,6 +18,7 @@ const Patients = () => {
             setPatients(data);
         } catch (error) {
             console.error('Error fetching patients:', error);
+            navigate('/error');
         } finally {
             setLoading(false);
         }

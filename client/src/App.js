@@ -8,6 +8,7 @@ import EditStudy from './components/Studies/EditStudy';
 import AddStudy from './components/Studies/AddStudy';
 import Navbar from './components/Navbar/Navbar';
 import Dashboard from './components/Dashboard/Dashboard';
+import ErrorPage from './components/ErrorPage/ErrorPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/edit-study/:studyId" element={<EditStudy />} />
           <Route path="/add-study" element={<AddStudy />} />
           <Route path="/patients" element={<Patients />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
     </Router>

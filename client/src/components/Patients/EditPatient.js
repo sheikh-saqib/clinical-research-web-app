@@ -36,16 +36,18 @@ const EditPatient = () => {
             }));
         } catch (error) {
             console.error('Error fetching patient:', error);
+            navigate('/error');
         }
     };
     
 
     const fetchRecruitingStudies = async () => {
         try {
-            const data = await studyService.fetchRecruitingStudies(); // Fetch recruiting studies from the backend
+            const data = await studyService.fetchRecruitingStudies();
             setRecruitingStudies(data);
         } catch (error) {
             console.error('Error fetching recruiting studies:', error);
+            navigate('/error');
         }
     };
 
@@ -96,6 +98,7 @@ const EditPatient = () => {
             
         } catch (error) {
             console.error('Error updating patient:', error);
+            navigate('/error');
         }
     };
 

@@ -23,6 +23,7 @@ const Dashboard = () => {
             setPatientStudies(data);
         } catch (error) {
             console.error('Error fetching patient studies:', error);
+            navigate('/error');
         } finally {
             setLoading(false);
         }

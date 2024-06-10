@@ -23,6 +23,7 @@ const EditStudy = () => {
             setStudy(fetchedStudy);
         } catch (error) {
             console.error('Error fetching study:', error);
+            navigate('/error');
         }
     };
 

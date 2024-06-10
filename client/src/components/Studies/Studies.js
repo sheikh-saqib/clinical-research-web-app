@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import ClipLoader from 'react-spinners/ClipLoader';
 import studyService from '../../services/StudyService';
@@ -8,7 +8,7 @@ import studyService from '../../services/StudyService';
 const Studies = () => {
     const [studies, setStudies] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const navigate = useNavigate();
     useEffect(() => {
         fetchStudies();
     }, []);
@@ -19,6 +19,7 @@ const Studies = () => {
             setStudies(data);
         } catch (error) {
             console.error('Error fetching studies:', error);
+            navigate('/error');
         } finally {
             setLoading(false);
         }
