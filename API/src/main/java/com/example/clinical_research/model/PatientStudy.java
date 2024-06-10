@@ -1,12 +1,21 @@
 package com.example.clinical_research.model;
 
+import jakarta.validation.constraints.NotNull;
+
 public class PatientStudy {
+    @NotNull
     private String patientName;
+    @NotNull
     private String studyTitle;
+    @NotNull
     private String studyDescription;
+    @NotNull
     private String studyStatus;
+    @NotNull
     private String recruitmentDate;
+    @NotNull
     private Long id;
+    @NotNull
     private Long studyId;
 
     public PatientStudy() {

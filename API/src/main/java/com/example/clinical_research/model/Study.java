@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Study {
@@ -11,10 +12,13 @@ public class Study {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studyId;
-
+    @NotNull
     private String title;
+    @NotNull
     private String therapeutics;
+    @NotNull
     private String description;
+    @NotNull
     private String status;
 
     // Constructors, getters, and setters

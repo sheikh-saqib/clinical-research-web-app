@@ -63,11 +63,12 @@ const Patients = () => {
                     <table className="table table-striped table-hover">
                         <thead className="thead-dark">
                             <tr>
-                                <th className="border">PatientID</th>
+                                <th className="border">PatientId</th>
                                 <th className="border">Name</th>
                                 <th className="border">Age</th>
                                 <th className="border">Gender</th>
                                 <th className="border">Condition</th>
+                                <th className="border">StudyId</th>
                                 <th className="border">Recruitment Date</th>
                                 <th colSpan={2} className="text-center border">Actions</th>
                             </tr>
@@ -75,11 +76,12 @@ const Patients = () => {
                         <tbody>
                             {patients.map(patient => (
                                 <tr key={patient.id}>
-                                    <td className="border bold">{patient.patientID}</td>
+                                    <td className="border bold">{patient.id}</td>
                                     <td className="border">{patient.name}</td>
                                     <td className="border">{patient.age}</td>
                                     <td className="border">{patient.gender}</td>
                                     <td className="border">{patient.condition}</td>
+                                    <td className="border bold">{parseInt(patient.patientID)}</td>
                                     <td className="border">{patient.recruitmentDate}</td>
                                     <td className="text-right">
                                         <Link to={`/edit/${patient.id}`} className="btn btn-primary">Edit</Link>

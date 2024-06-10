@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Modal } from 'react-bootstrap';
 import ClipLoader from 'react-spinners/ClipLoader';
 import dashboardService from '../../services/DashboardService';
@@ -12,22 +12,22 @@ const Dashboard = () => {
     const [showModal, setShowModal] = useState(false);
     const [selectedPatient, setSelectedPatient] = useState(null);
     const navigate = useNavigate();
-    
-    useEffect(() => {
-        fetchPatientStudies();
-    }, []);
 
-    const fetchPatientStudies = async () => {
-        try {
-            const data = await dashboardService.getPatientStudyDetails();
-            setPatientStudies(data);
-        } catch (error) {
-            console.error('Error fetching patient studies:', error);
-            navigate('/error');
-        } finally {
-            setLoading(false);
-        }
-    };
+    useEffect(() => {
+        const fetchPatientStudies = async () => {
+            try {
+                const data = await dashboardService.getPatientStudyDetails();
+                setPatientStudies(data);
+            } catch (error) {
+                console.error('Error fetching patient studies:', error);
+                navigate('/error');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchPatientStudies();
+    }, [navigate]);
 
     const handleDelete = async (patientId) => {
         try {
@@ -86,9 +86,9 @@ const Dashboard = () => {
     return (
         <div className="container">
             <h2>Patient Study Details</h2>
-                <Button variant="success" className="mb-3" onClick={handleRecruitNewPatient}>
-                    Recruit New Patient
-                </Button>
+            <Button variant="success" className="mb-3" onClick={handleRecruitNewPatient}>
+                Recruit New Patient
+            </Button>
             <div>
                 {loading ? (
                     <div className="text-center">
@@ -108,8 +108,8 @@ const Dashboard = () => {
                         <tbody>
                             {patientStudies.map(patientStudy => (
                                 <tr key={patientStudy.id}>
-                                    <td 
-                                        className="border bold" 
+                                    <td
+                                        className="border bold"
                                         style={{ cursor: 'pointer', color: 'blue' }}
                                         onClick={() => handleShowModal(patientStudy.id)}
                                     >
@@ -159,3 +159,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+

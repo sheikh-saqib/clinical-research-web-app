@@ -1,5 +1,6 @@
 package com.example.clinical_research.model;
 
+import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,12 +11,17 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @NotNull
     private String patientID;
+    @NotNull
     private String name;
+    @NotNull
     private int age;
+    @NotNull
     private String gender;
+    @NotNull
     private String condition;
+    @NotNull
     private String recruitmentDate;
 
     public Patient() {

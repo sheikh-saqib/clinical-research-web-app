@@ -54,6 +54,9 @@ const EditStudy = () => {
             Swal.fire('Error', 'Failed to update study. Please try again later.', 'error');
         }
     };
+    const handleCancel = () => {
+        navigate(-1); // Navigate back one step in the history
+    };
 
     return (
         <div className="container">
@@ -83,6 +86,7 @@ const EditStudy = () => {
                     </select>
                 </div>
                 <button type="submit" className="btn btn-primary mt-3">Save Changes</button>
+                <button type="button" className="btn btn-secondary mt-3 cancelButton" onClick={handleCancel}>Cancel</button>
             </form>
         </div>
     );
