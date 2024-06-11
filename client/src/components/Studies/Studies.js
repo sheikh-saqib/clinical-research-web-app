@@ -4,10 +4,13 @@ import Button from 'react-bootstrap/Button';
 import Swal from 'sweetalert2';
 import ClipLoader from 'react-spinners/ClipLoader';
 import studyService from '../../services/StudyService';
+import Pagination from 'react-js-pagination';
 
 const Studies = () => {
     const [studies, setStudies] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [studiesPerPage] = useState(10);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -15,6 +18,7 @@ const Studies = () => {
         fetchStudies();
         // eslint-disable-next-line
     }, []);
+
     //fetch study data from backend
     const fetchStudies = async () => {
         try {
@@ -27,7 +31,17 @@ const Studies = () => {
             setLoading(false);
         }
     };
-    // delete study data from backend
+
+    //pagination on page change
+    const handlePageChange = pageNumber => {
+        setCurrentPage(pageNumber);
+    };
+
+    const indexOfLastStudy = currentPage * studiesPerPage;
+    const indexOfFirstStudy = indexOfLastStudy - studiesPerPage;
+    const currentStudies = studies.slice(indexOfFirstStudy, indexOfLastStudy);
+
+    //on delete click
     const handleDelete = async (studyId) => {
         try {
             const result = await Swal.fire({
@@ -40,6 +54,7 @@ const Studies = () => {
             });
 
             if (result.isConfirmed) {
+                 // delete study data from backend
                 await studyService.delete(studyId);
                 //reset the study list
                 setStudies(studies.filter(study => study.studyId !== studyId));
@@ -69,43 +84,57 @@ const Studies = () => {
                         <ClipLoader size={50} loading={loading} />
                     </div>
                 ) : (
-                    <table className="table table-striped table-hover">
-                        <thead className="thead-dark">
-                            <tr>
-                                <th className="border text-center align-middle">StudyID</th>
-                                <th className="border text-center align-middle">Title</th>
-                                <th className="border text-center align-middle">Therapeutics</th>
-                                <th className="border text-center align-middle">Description</th>
-                                <th className="border text-center align-middle">Status</th>
-                                <th colSpan={2} className="text-center align-middle border">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {studies.map(study => (
-                                <tr key={study.studyId}>
-                                    <td className="border bold">{study.studyId}</td>
-                                    <td className="border">{study.title}</td>
-                                    <td className="border">{study.therapeutics}</td>
-                                    <td className="border">{study.description}</td>
-                                    <td className="border">{study.status}</td>
-                                    <td className="text-right">
-                                        <Link to={`/edit-study/${study.studyId}`} className="btn btn-primary">Edit</Link>
-                                    </td>
-                                    <td className="border-right">
-                                        <button
-                                            onClick={() => handleDelete(study.studyId)}
-                                            className="btn btn-danger"
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
+                    <div>
+                        <table className="table table-striped table-hover">
+                            <thead className="thead-dark">
+                                <tr>
+                                    <th className="border text-center align-middle">StudyID</th>
+                                    <th className="border text-center align-middle">Title</th>
+                                    <th className="border text-center align-middle">Therapeutics</th>
+                                    <th className="border text-center align-middle">Description</th>
+                                    <th className="border text-center align-middle">Status</th>
+                                    <th colSpan={2} className="text-center align-middle border">Actions</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {currentStudies.map(study => (
+                                    <tr key={study.studyId}>
+                                        <td className="border bold">{study.studyId}</td>
+                                        <td className="border">{study.title}</td>
+                                        <td className="border">{study.therapeutics}</td>
+                                        <td className="border">{study.description}</td>
+                                        <td className="border">{study.status}</td>
+                                        <td className="text-right">
+                                            <Link to={`/edit-study/${study.studyId}`} className="btn btn-primary">Edit</Link>
+                                        </td>
+                                        <td className="border-right">
+                                            <button
+                                                onClick={() => handleDelete(study.studyId)}
+                                                className="btn btn-danger"
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                        <div className="d-flex justify-content-center mt-4">
+                            <Pagination
+                                activePage={currentPage}
+                                itemsCountPerPage={studiesPerPage}
+                                totalItemsCount={studies.length}
+                                pageRangeDisplayed={5}
+                                onChange={handlePageChange}
+                                itemClass="page-item"
+                                linkClass="page-link"
+                            />
+                        </div>
+                    </div>
                 )}
             </div>
         </div>
     );
 };
+
 export default Studies;

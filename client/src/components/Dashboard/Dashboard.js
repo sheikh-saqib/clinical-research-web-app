@@ -6,14 +6,16 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import dashboardService from '../../services/DashboardService';
 import patientService from '../../services/PatientService';
 import studyService from '../../services/StudyService';
+import Pagination from 'react-js-pagination';
 
 const Dashboard = () => {
     const [patientStudies, setPatientStudies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const [selectedPatient, setSelectedPatient] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [patientsPerPage] = useState(10);
     const navigate = useNavigate();
-
 
     useEffect(() => {
         // function to fetch the patient study data
@@ -27,10 +29,12 @@ const Dashboard = () => {
             } finally {
                 setLoading(false);
             }
+            
         };
         // fetching the patient study data
-        fetchPatientStudies();
-    }, [navigate]); // fetch the patient study data everytime the navigate changes
+        fetchPatientStudies(); // fetch the patient study data everytime the navigate changes
+        // eslint-disable-next-line
+    }, [navigate]);
 
     // on delete click
     const handleDelete = async (patientId) => {
@@ -58,7 +62,6 @@ const Dashboard = () => {
             Swal.fire('Error', 'Failed to delete patient. Please try again later.', 'error');
         }
     };
-
     // on patient name click
     const handleShowModal = async (patientId) => {
         try {
@@ -93,7 +96,7 @@ const Dashboard = () => {
                     confirmButtonText: 'Okay'
                 });
             } else {
-                // if there are records available, go to the addPatient page
+                 // if there are records available, go to the addPatient page
                 navigate('/add-patient');
             }
         } catch (error) {
@@ -101,7 +104,15 @@ const Dashboard = () => {
             Swal.fire('Error', 'Failed to fetch recruiting studies. Please try again later.', 'error');
         }
     };
-    
+
+    //pagination page change click
+    const handlePageChange = pageNumber => {
+        setCurrentPage(pageNumber);
+    };
+
+    const indexOfLastPatient = currentPage * patientsPerPage;
+    const indexOfFirstPatient = indexOfLastPatient - patientsPerPage;
+    const currentPatients = patientStudies.slice(indexOfFirstPatient, indexOfLastPatient);
 
     return (
         <div className="container">
@@ -116,44 +127,57 @@ const Dashboard = () => {
                             <ClipLoader size={50} loading={loading} />
                         </div>
                     ) : (
-                        <table className="table table-striped table-hover">
-                            <thead className="thead-dark">
-                                <tr>
-                                    <th className="border text-center align-middle">Patient Name</th>
-                                    <th className="border text-center align-middle">Study Title</th>
-                                    <th className="border text-center align-middle">Study Description</th>
-                                    <th className="border text-center align-middle">Recruitment Date</th>
-                                    <th colSpan={2} className="text-center border align-middle">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {patientStudies.map(patientStudy => (
-                                    <tr key={patientStudy.id}>
-                                        <td
-                                            className="border bold"
-                                            style={{ cursor: 'pointer', color: 'blue' }}
-                                            onClick={() => handleShowModal(patientStudy.id)}
-                                        >
-                                            {patientStudy.patientName}
-                                        </td>
-                                        <td className="border">{patientStudy.studyTitle}</td>
-                                        <td className="border">{patientStudy.studyDescription}</td>
-                                        <td className="border">{patientStudy.recruitmentDate}</td>
-                                        <td className="text-right">
-                                            <Link to={`/edit/${patientStudy.id}`} className="btn btn-primary">Edit</Link>
-                                        </td>
-                                        <td className="border-right">
-                                            <button
-                                                onClick={() => handleDelete(patientStudy.id)}
-                                                className="btn btn-danger"
-                                            >
-                                                Delete
-                                            </button>
-                                        </td>
+                        <div>
+                            <table className="table table-striped table-hover">
+                                <thead className="thead-dark">
+                                    <tr>
+                                        <th className="border text-center align-middle">Patient Name</th>
+                                        <th className="border text-center align-middle">Study Title</th>
+                                        <th className="border text-center align-middle">Study Description</th>
+                                        <th className="border text-center align-middle">Recruitment Date</th>
+                                        <th colSpan={2} className="text-center border align-middle">Actions</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {currentPatients.map(patientStudy => (
+                                        <tr key={patientStudy.id}>
+                                            <td
+                                                className="border bold"
+                                                style={{ cursor: 'pointer', color: 'blue' }}
+                                                onClick={() => handleShowModal(patientStudy.id)}
+                                            >
+                                                {patientStudy.patientName}
+                                            </td>
+                                            <td className="border">{patientStudy.studyTitle}</td>
+                                            <td className="border">{patientStudy.studyDescription}</td>
+                                            <td className="border">{patientStudy.recruitmentDate}</td>
+                                            <td className="text-right">
+                                                <Link to={`/edit/${patientStudy.id}`} className="btn btn-primary">Edit</Link>
+                                            </td>
+                                            <td className="border-right">
+                                                <button
+                                                    onClick={() => handleDelete(patientStudy.id)}
+                                                    className="btn btn-danger"
+                                                >
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            <div className="d-flex justify-content-center mt-4">
+                                <Pagination
+                                    activePage={currentPage}
+                                    itemsCountPerPage={patientsPerPage}
+                                    totalItemsCount={patientStudies.length}
+                                    pageRangeDisplayed={5}
+                                    onChange={handlePageChange}
+                                    itemClass="page-item"
+                                    linkClass="page-link"
+                                />
+                            </div>
+                        </div>
                     )}
                 </div>
             </div>
@@ -178,7 +202,6 @@ const Dashboard = () => {
             )}
         </div>
     );
-    
 };
 
 export default Dashboard;
