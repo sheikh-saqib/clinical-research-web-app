@@ -25,8 +25,7 @@ Make sure you have the following installed on your machine:
 1. **Clone the repository:**
 
     ```sh
-    git clone https://github.com/sheikh-saqib/clinical-research.git
-    cd clinical-research
+    git clone https://github.com/sheikh-saqib/clinical-research-web-app.git
     ```
 
 2. **Navigate to the backend directory:**
@@ -41,13 +40,7 @@ Make sure you have the following installed on your machine:
     ./mvnw clean install
     ```
 
-4. **Run the backend tests:**
-
-    ```sh
-    ./mvnw test
-    ```
-
-5. **Run the backend application:**
+4. **Run the backend application:**
 
     ```sh
     ./mvnw spring-boot:run
