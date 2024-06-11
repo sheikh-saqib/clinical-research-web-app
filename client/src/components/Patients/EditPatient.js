@@ -26,18 +26,18 @@ const EditPatient = () => {
     }, []);
 
     useEffect(() => {
-        //fetch the current patient
+        // Fetch the current patient
         fetchPatient();
         // eslint-disable-next-line
-    }, [recruitingStudies]); 
+    }, [recruitingStudies]);
 
     const fetchPatient = async () => {
         try {
-            //get the patient details by ID
+            // Get the patient details by ID
             const data = await patientService.getById(id);
-            // convert the string to int (e-g 005 -> 5)
+            // Convert the string to int (e.g., 005 -> 5)
             const selectedStudyId = parseInt(data.patientID);
-            // check if the selected study exists in the list of recruiting studies
+            // Check if the selected study exists in the list of recruiting studies
             const studyExists = recruitingStudies.some(study => study.studyId === selectedStudyId);
             setPatient(prevState => ({
                 ...prevState,
@@ -49,7 +49,8 @@ const EditPatient = () => {
             navigate('/error');
         }
     };
-    //fetch the studies which have status as "Recruiting"
+
+    // Fetch the studies which have status as "Recruiting"
     const fetchRecruitingStudies = async () => {
         try {
             const data = await studyService.fetchRecruitingStudies();
@@ -59,15 +60,26 @@ const EditPatient = () => {
             navigate('/error');
         }
     };
-    //handle state change
+
+    // Handle state change
     const handleChange = e => {
         const { name, value } = e.target;
+
+        // Validate age input to be within 1-100
+        if (name === 'age') {
+            const age = parseInt(value);
+            if (age < 1 || age > 100) {
+                return;
+            }
+        }
+
         setPatient(prevState => ({
             ...prevState,
             [name]: value
         }));
     };
-    //check if user wants to change the study
+
+    // Check if user wants to change the study
     const handleStudyChange = e => {
         const value = e.target.value === 'true';
         setChangeStudy(value);
@@ -85,7 +97,8 @@ const EditPatient = () => {
             }));
         }
     };
-    //save the changes
+
+    // Save the changes
     const handleSubmit = async e => {
         e.preventDefault();
         try {
@@ -135,7 +148,7 @@ const EditPatient = () => {
                     </div>
                     <div className="col-md-6 form-group mb-3">
                         <label>Age <span className="required">*</span></label>
-                        <input type="number" name="age" value={patient.age} onChange={handleChange} className="form-control" required />
+                        <input type="number" name="age" value={patient.age} onChange={handleChange} className="form-control" min="1" max="100" required />
                     </div>
                 </div>
                 <div className="row">
@@ -197,27 +210,27 @@ const EditPatient = () => {
                     </div>
                 </div>
                 <div className="row">
-                <Collapse in={changeStudy === true}>
-                    <div id="study-collapse">
-                        {recruitingStudies.length === 0 ? (
-                            <div className="alert alert-info" role="alert">
-                                There are no available studies left, so the existing study will be assigned.
-                            </div>
-                        ) : (
-                            <div className="row">
-                                <div className="col-md-12 form-group mb-3">
-                                    <label>Available Studies <span className="required">*</span></label>
-                                    <select name="selectedStudyId" value={patient.selectedStudyId} onChange={handleChange} className="form-control" required>
-                                        <option value="" disabled>Select a study...</option>
-                                        {recruitingStudies.map(study => (
-                                            <option key={study.studyId} value={study.studyId}>{study.title}</option>
-                                        ))}
-                                    </select>
+                    <Collapse in={changeStudy === true}>
+                        <div id="study-collapse">
+                            {recruitingStudies.length === 0 ? (
+                                <div className="alert alert-info" role="alert">
+                                    There are no available studies left, so the existing study will be assigned.
                                 </div>
-                            </div>
-                        )}
-                    </div>
-                </Collapse>
+                            ) : (
+                                <div className="row">
+                                    <div className="col-md-12 form-group mb-3">
+                                        <label>Available Studies <span className="required">*</span></label>
+                                        <select name="selectedStudyId" value={patient.selectedStudyId} onChange={handleChange} className="form-control" required>
+                                            <option value="" disabled>Select a study...</option>
+                                            {recruitingStudies.map(study => (
+                                                <option key={study.studyId} value={study.studyId}>{study.title}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </Collapse>
                 </div>
                 
                 <div className="row">
@@ -231,4 +244,4 @@ const EditPatient = () => {
     );
 };
 
-export default EditPatient;
+export default EditPatient

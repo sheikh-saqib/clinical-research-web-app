@@ -18,12 +18,12 @@ const AddPatient = () => {
     });
 
     useEffect(() => {
-        // call the function to fetch the dropdown for Avaliable Studies
+        // call the function to fetch the dropdown for Available Studies
         fetchRecruitingStudies(); 
         // eslint-disable-next-line
     }, []);
 
-    //fetch the dropdown values for avalibale studies
+    //fetch the dropdown values for available studies
     const fetchRecruitingStudies = async () => {
         try {
             const data = await studyService.fetchRecruitingStudies();
@@ -36,14 +36,25 @@ const AddPatient = () => {
             navigate('/error');
         }
     };
+
     //handle state change
     const handleChange = e => {
         const { name, value } = e.target;
+
+        // Validate age input to be within 1-100
+        if (name === 'age') {
+            const age = parseInt(value);
+            if (age < 1 || age > 100) {
+                return;
+            }
+        }
+
         setPatient(prevState => ({
             ...prevState,
             [name]: value
         }));
     };
+
     // save the new patient
     const handleSubmit = async e => {
         e.preventDefault();
@@ -85,7 +96,7 @@ const AddPatient = () => {
                     <div className="col-md-6">
                         <div className="form-group">
                             <label>Age <span className="required">*</span></label>
-                            <input type="number" name="age" value={patient.age} onChange={handleChange} className="form-control" required />
+                            <input type="number" name="age" value={patient.age} onChange={handleChange} className="form-control" min="1" max="100" required />
                         </div>
                     </div>
                 </div>
