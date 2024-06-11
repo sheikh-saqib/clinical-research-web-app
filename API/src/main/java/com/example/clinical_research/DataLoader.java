@@ -25,11 +25,20 @@ public class DataLoader implements CommandLineRunner {
     @Autowired
     private StudyService studyService;
 
+    /**
+     * Runs the data loading process.
+     */
     @Override
     public void run(String... args) throws Exception {
         loadPatients();
         loadStudies();
     }
+
+    /**
+     * Loads patient data from a Patients JSON file in resources folder.
+     * 
+     * @throws IOException if an I/O error occurs
+     */
 
     private void loadPatients() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
@@ -40,6 +49,11 @@ public class DataLoader implements CommandLineRunner {
         patients.forEach(patientService::savePatient);
     }
 
+    /**
+     * Loads study data from a Studies JSON file from resources folder.
+     * 
+     * @throws IOException if an I/O error occurs
+     */
     private void loadStudies() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         TypeReference<List<Study>> typeReference = new TypeReference<List<Study>>() {

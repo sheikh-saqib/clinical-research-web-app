@@ -28,6 +28,13 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
+    /**
+     * Creates a new patient.
+     * 
+     * @param patient The patient to create.
+     * @return ResponseEntity containing the created patient or an error response if
+     *         an exception occurs.
+     */
     @PostMapping
     public ResponseEntity<Patient> createPatient(@RequestBody Patient patient) {
         try {
@@ -38,6 +45,12 @@ public class PatientController {
         }
     }
 
+    /**
+     * Gives all patients.
+     * 
+     * @return ResponseEntity containing the list of patients or an error response
+     *         if an exception occurs.
+     */
     @GetMapping
     public ResponseEntity<List<Patient>> getAllPatients() {
         try {
@@ -48,6 +61,13 @@ public class PatientController {
         }
     }
 
+    /**
+     * Gives a patient by ID.
+     * 
+     * @param id The ID of the patient to retrieve.
+     * @return ResponseEntity containing the patient with the specified ID or an
+     *         error response if the patient is not found or an exception occurs.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Patient>> getPatientById(@PathVariable Long id) {
         try {
@@ -62,6 +82,14 @@ public class PatientController {
         }
     }
 
+    /**
+     * Updates a patient by ID.
+     * 
+     * @param id             The ID of the patient to update.
+     * @param patientDetails The updated patient details.
+     * @return ResponseEntity containing the updated patient or an error response if
+     *         the patient is not found or an exception occurs.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Patient> updatePatient(@PathVariable Long id, @RequestBody Patient patientDetails) {
         try {
@@ -72,6 +100,13 @@ public class PatientController {
         }
     }
 
+    /**
+     * Deletes a patient by ID.
+     * 
+     * @param id The ID of the patient to delete.
+     * @return ResponseEntity indicating success or an error response if the patient
+     *         is not found or an exception occurs.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePatient(@PathVariable Long id) {
         try {
@@ -82,13 +117,22 @@ public class PatientController {
         }
     }
 
+    /**
+     * Partially updates a patient by ID.
+     * 
+     * @param id      The ID of the patient to update.
+     * @param updates The map containing partial updates to apply to the patient.
+     * @return ResponseEntity containing the updated patient or an error response if
+     *         the patient is not found, an invalid field is provided, or an
+     *         exception occurs.
+     */
     @PatchMapping("/{id}")
     public ResponseEntity<Patient> patchPatient(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
         try {
             Patient patient = patientService.getPatientById(id)
                     .orElseThrow(() -> new RuntimeException("Patient not found with id: " + id));
 
-            // Apply partial updates
+            // Apply partial updates which are present in the payload
             updates.forEach((key, value) -> {
                 switch (key) {
                     case "name":

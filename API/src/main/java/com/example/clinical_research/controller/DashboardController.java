@@ -19,6 +19,12 @@ public class DashboardController {
     @Autowired
     private DashboardService dashboardService;
 
+    /**
+     * Retrieves details of patient studies from the dashboard service.
+     * 
+     * @return ResponseEntity containing the list of PatientStudy objects, or an
+     *         error response if an exception occurs
+     */
     @GetMapping("/dashboard")
     public ResponseEntity<List<PatientStudy>> getPatientStudies() {
         try {

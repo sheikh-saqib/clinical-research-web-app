@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.clinical_research.model.Study;
 import com.example.clinical_research.service.StudyService;
 
+/**
+ * Controller class for managing study-related endpoints.
+ */
 @RestController
 @RequestMapping("/api/studies")
 public class StudyController {
@@ -27,6 +30,13 @@ public class StudyController {
     @Autowired
     private StudyService studyService;
 
+    /**
+     * Creates a new study.
+     * 
+     * @param study The study to create.
+     * @return ResponseEntity containing the created study or an error response if
+     *         an exception occurs.
+     */
     @PostMapping
     public ResponseEntity<Study> createStudy(@RequestBody Study study) {
         try {
@@ -37,6 +47,12 @@ public class StudyController {
         }
     }
 
+    /**
+     * Retrieves all studies.
+     * 
+     * @return ResponseEntity containing the list of studies or an error response if
+     *         an exception occurs.
+     */
     @GetMapping
     public ResponseEntity<List<Study>> getAllStudies() {
         try {
@@ -47,6 +63,13 @@ public class StudyController {
         }
     }
 
+    /**
+     * Retrieves a study by ID.
+     * 
+     * @param id The ID of the study to retrieve.
+     * @return ResponseEntity containing the study with the specified ID or an error
+     *         response if the study is not found or an exception occurs.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Study>> getStudyById(@PathVariable Long id) {
         try {
@@ -61,6 +84,14 @@ public class StudyController {
         }
     }
 
+    /**
+     * Updates a study by ID.
+     * 
+     * @param id           The ID of the study to update.
+     * @param studyDetails The updated study details.
+     * @return ResponseEntity containing the updated study or an error response if
+     *         the study is not found or an exception occurs.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Study> updateStudy(@PathVariable Long id, @RequestBody Study studyDetails) {
         try {
@@ -71,6 +102,13 @@ public class StudyController {
         }
     }
 
+    /**
+     * Deletes a study by ID.
+     * 
+     * @param id The ID of the study to delete.
+     * @return ResponseEntity indicating success or an error response if the study
+     *         is not found or an exception occurs.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStudy(@PathVariable Long id) {
         try {
@@ -81,6 +119,15 @@ public class StudyController {
         }
     }
 
+    /**
+     * Partially updates a study by ID.
+     * 
+     * @param id      The ID of the study to update.
+     * @param updates The map containing partial updates to apply to the study.
+     * @return ResponseEntity containing the updated study or an error response if
+     *         the study is not found, an invalid field is provided, or an exception
+     *         occurs.
+     */
     @PatchMapping("/{id}")
     public ResponseEntity<Study> patchStudy(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
         try {
@@ -112,6 +159,12 @@ public class StudyController {
         }
     }
 
+    /**
+     * Retrieves all recruiting studies.
+     * 
+     * @return ResponseEntity containing the list of recruiting studies or an error
+     *         response if an exception occurs.
+     */
     @GetMapping("/recruiting")
     public ResponseEntity<List<Study>> getRecruitingStudies() {
         try {
