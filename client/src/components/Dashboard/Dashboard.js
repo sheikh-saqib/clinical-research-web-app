@@ -14,7 +14,9 @@ const Dashboard = () => {
     const [selectedPatient, setSelectedPatient] = useState(null);
     const navigate = useNavigate();
 
+
     useEffect(() => {
+        // function to fetch the patient study data
         const fetchPatientStudies = async () => {
             try {
                 const data = await dashboardService.getPatientStudyDetails();
@@ -26,10 +28,11 @@ const Dashboard = () => {
                 setLoading(false);
             }
         };
-
+        // fetching the patient study data
         fetchPatientStudies();
-    }, [navigate]);
+    }, [navigate]); // fetch the patient study data everytime the navigate changes
 
+    // on delete click
     const handleDelete = async (patientId) => {
         try {
             const result = await Swal.fire({
@@ -42,7 +45,9 @@ const Dashboard = () => {
             });
 
             if (result.isConfirmed) {
+                // remove the patient from the database
                 await patientService.delete(patientId);
+                //update the state
                 setPatientStudies(patientStudies.filter(patientStudy => patientStudy.id !== patientId));
                 Swal.fire('Deleted!', 'The patient has been deleted.', 'success');
             } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -54,8 +59,10 @@ const Dashboard = () => {
         }
     };
 
+    // on patient name click
     const handleShowModal = async (patientId) => {
         try {
+            //get patient details based on Id
             const patientData = await patientService.getById(patientId);
             setSelectedPatient(patientData);
             setShowModal(true);
@@ -64,18 +71,21 @@ const Dashboard = () => {
             Swal.fire('Error', 'Failed to fetch patient details. Please try again later.', 'error');
         }
     };
-
+    // close modal
     const handleCloseModal = () => {
         setShowModal(false);
         setSelectedPatient(null);
     };
 
+    // on recruit new patient click
     const handleRecruitNewPatient = async () => {
         try {
+            // check if there are any recruiting studies available
             const data = await studyService.fetchRecruitingStudies();
             const hasRecruitingStudies = data.some(study => study.status === "Recruiting");
             console.log(hasRecruitingStudies);
             if (!hasRecruitingStudies) {
+                // notify the user about no recruiting studies available
                 Swal.fire({
                     icon: 'info',
                     title: 'No Studies Available',
@@ -83,6 +93,7 @@ const Dashboard = () => {
                     confirmButtonText: 'Okay'
                 });
             } else {
+                // if there are records available, go to the addPatient page
                 navigate('/add-patient');
             }
         } catch (error) {

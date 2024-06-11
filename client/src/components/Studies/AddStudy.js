@@ -11,7 +11,7 @@ const AddStudy = () => {
         description: '',
         status: ''
     });
-
+    // handle state change
     const handleChange = e => {
         const { name, value } = e.target;
         setStudy(prevState => ({
@@ -19,7 +19,7 @@ const AddStudy = () => {
             [name]: value
         }));
     };
-
+    //save new study
     const handleSubmit = async e => {
         e.preventDefault();
         try {

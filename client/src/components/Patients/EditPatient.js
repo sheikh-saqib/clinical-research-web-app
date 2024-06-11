@@ -22,16 +22,22 @@ const EditPatient = () => {
 
     useEffect(() => {
         fetchRecruitingStudies();
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
+        //fetch the current patient
         fetchPatient();
-    }, [recruitingStudies]);
+        // eslint-disable-next-line
+    }, [recruitingStudies]); 
 
     const fetchPatient = async () => {
         try {
+            //get the patient details by ID
             const data = await patientService.getById(id);
+            // convert the string to int (e-g 005 -> 5)
             const selectedStudyId = parseInt(data.patientID);
+            // check if the selected study exists in the list of recruiting studies
             const studyExists = recruitingStudies.some(study => study.studyId === selectedStudyId);
             setPatient(prevState => ({
                 ...prevState,
@@ -43,7 +49,7 @@ const EditPatient = () => {
             navigate('/error');
         }
     };
-
+    //fetch the studies which have status as "Recruiting"
     const fetchRecruitingStudies = async () => {
         try {
             const data = await studyService.fetchRecruitingStudies();
@@ -53,7 +59,7 @@ const EditPatient = () => {
             navigate('/error');
         }
     };
-
+    //handle state change
     const handleChange = e => {
         const { name, value } = e.target;
         setPatient(prevState => ({
@@ -61,7 +67,7 @@ const EditPatient = () => {
             [name]: value
         }));
     };
-
+    //check if user wants to change the study
     const handleStudyChange = e => {
         const value = e.target.value === 'true';
         setChangeStudy(value);
@@ -79,7 +85,7 @@ const EditPatient = () => {
             }));
         }
     };
-
+    //save the changes
     const handleSubmit = async e => {
         e.preventDefault();
         try {
@@ -106,10 +112,10 @@ const EditPatient = () => {
                 icon: 'success',
                 title: 'Success!',
                 text: 'Patient details updated successfully!',
-                confirmButtonText: 'Go to Home Page'
+                confirmButtonText: 'Awesome !!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    navigate('/');
+                    navigate(-1);
                 }
             });
         } catch (error) {

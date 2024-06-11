@@ -8,10 +8,14 @@ const Patients = () => {
     const [patients, setPatients] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+
     useEffect(() => {
+        //fetch the patient data
         fetchPatients();
+        // eslint-disable-next-line
     }, []);
 
+    // function to fetch the patient data
     const fetchPatients = async () => {
         try {
             const data = await patientService.getAll();
@@ -23,7 +27,7 @@ const Patients = () => {
             setLoading(false);
         }
     };
-
+    //on delete click 
     const handleDelete = async (id) => {
         try {
             const result = await Swal.fire({
@@ -36,7 +40,9 @@ const Patients = () => {
             });
 
             if (result.isConfirmed) {
+                //delete the patient from the database
                 await patientService.delete(id);
+                //update the array
                 setPatients(patients.filter(patient => patient.id !== id));
                 Swal.fire('Deleted!', 'The patient has been deleted.', 'success');
             } else if (result.dismiss === Swal.DismissReason.cancel) {

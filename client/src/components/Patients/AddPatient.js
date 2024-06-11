@@ -18,12 +18,15 @@ const AddPatient = () => {
     });
 
     useEffect(() => {
+        // call the function to fetch the dropdown for Avaliable Studies
         fetchRecruitingStudies(); 
+        // eslint-disable-next-line
     }, []);
 
+    //fetch the dropdown values for avalibale studies
     const fetchRecruitingStudies = async () => {
         try {
-            const data = await studyService.fetchRecruitingStudies(); // Fetch recruiting studies from the backend
+            const data = await studyService.fetchRecruitingStudies();
             setPatient(prevState => ({
                 ...prevState,
                 recruitingStudies: data
@@ -33,7 +36,7 @@ const AddPatient = () => {
             navigate('/error');
         }
     };
-
+    //handle state change
     const handleChange = e => {
         const { name, value } = e.target;
         setPatient(prevState => ({
@@ -41,7 +44,7 @@ const AddPatient = () => {
             [name]: value
         }));
     };
-
+    // save the new patient
     const handleSubmit = async e => {
         e.preventDefault();
         try {

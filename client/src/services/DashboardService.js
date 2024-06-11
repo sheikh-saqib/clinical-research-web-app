@@ -5,6 +5,7 @@ const DashboardService = {
     getPatientStudyDetails: async () => {
         try {
             const response = await axios.get(`${BASE_URL}/dashboard`);
+            //sort the patients by recruitment date
             const sortedData = response.data.sort((a, b) => new Date(b.recruitmentDate) - new Date(a.recruitmentDate));
             return sortedData;
         } catch (error) {

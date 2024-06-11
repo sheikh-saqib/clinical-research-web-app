@@ -11,9 +11,11 @@ const Studies = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        //call the function to get the study data
         fetchStudies();
+        // eslint-disable-next-line
     }, []);
-
+    //fetch study data from backend
     const fetchStudies = async () => {
         try {
             const data = await studyService.getAll();
@@ -25,7 +27,7 @@ const Studies = () => {
             setLoading(false);
         }
     };
-
+    // delete study data from backend
     const handleDelete = async (studyId) => {
         try {
             const result = await Swal.fire({
@@ -39,6 +41,7 @@ const Studies = () => {
 
             if (result.isConfirmed) {
                 await studyService.delete(studyId);
+                //reset the study list
                 setStudies(studies.filter(study => study.studyId !== studyId));
                 Swal.fire('Deleted!', 'The study has been deleted.', 'success');
             } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -104,7 +107,5 @@ const Studies = () => {
             </div>
         </div>
     );
-    
 };
-
 export default Studies;

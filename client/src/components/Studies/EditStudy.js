@@ -12,13 +12,16 @@ const EditStudy = () => {
         description: '',
         status: ''
     });
-
+    //call the function to fetch the selected study 
     useEffect(() => {
         fetchStudy();
+        // eslint-disable-next-line
     }, []);
 
+    //function to fetch the study
     const fetchStudy = async () => {
         try {
+            //get study by Id
             const fetchedStudy = await studyService.getById(studyId);
             setStudy(fetchedStudy);
         } catch (error) {
@@ -26,7 +29,7 @@ const EditStudy = () => {
             navigate('/error');
         }
     };
-
+    // handle state change
     const handleChange = e => {
         const { name, value } = e.target;
         setStudy(prevState => ({
@@ -34,7 +37,7 @@ const EditStudy = () => {
             [name]: value
         }));
     };
-
+    //save the current study
     const handleSubmit = async e => {
         e.preventDefault();
         try {
@@ -61,13 +64,13 @@ const EditStudy = () => {
             <form onSubmit={handleSubmit}>
                 <div className="row">
                     <div className="col-md-6">
-                        <div className="form-group">
+                        <div className="form-group mb-3">
                             <label>Title <span className="required">*</span></label>
                             <input type="text" name="title" value={study.title} onChange={handleChange} className="form-control" required />
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <div className="form-group">
+                        <div className="form-group mb-3">
                             <label>Therapeutics <span className="required">*</span></label>
                             <input type="text" name="therapeutics" value={study.therapeutics} onChange={handleChange} className="form-control" required />
                         </div>
@@ -75,7 +78,7 @@ const EditStudy = () => {
                 </div>
                 <div className="row">
                     <div className="col-md-12">
-                        <div className="form-group">
+                        <div className="form-group mb-3">
                             <label>Description <span className="required">*</span></label>
                             <textarea name="description" value={study.description} onChange={handleChange} className="form-control" required />
                         </div>
@@ -83,10 +86,10 @@ const EditStudy = () => {
                 </div>
                 <div className="row">
                     <div className="col-md-6">
-                        <div className="form-group">
+                        <div className="form-group ">
                             <label>Status <span className="required">*</span></label>
                             <select name="status" value={study.status} onChange={handleChange} className="form-control" required>
-                                <option value="">Please select</option>
+                                <option value="" disabled>Please select</option>
                                 <option value="Recruiting">Recruiting</option>
                                 <option value="Completed">Completed</option>
                                 <option value="Withdrawn">Withdrawn</option>
