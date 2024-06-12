@@ -28,22 +28,28 @@ Make sure you have the following installed on your machine:
     git clone https://github.com/sheikh-saqib/clinical-research-web-app.git
     ```
 
-2. **Navigate to the backend directory:**
+2. **Navigate to the project directory:**
+
+    ```sh
+    cd clinical-research-web-app
+    ```
+
+3. **Navigate to the backend directory:**
 
     ```sh
     cd API
     ```
 
-3. **Build the backend application:**
+4. **Build the backend application:**
 
     ```sh
-    ./mvnw clean install
+    mvnw clean install
     ```
 
-4. **Run the backend application:**
+5. **Run the backend application:**
 
     ```sh
-    ./mvnw spring-boot:run
+    mvnw spring-boot:run
     ```
 
     The backend server should now be running on `http://localhost:8080`.
