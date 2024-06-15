@@ -13,7 +13,7 @@ import com.example.clinical_research.service.DashboardService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api") // look for this mapping in the url
 public class DashboardController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class DashboardController {
      * @return ResponseEntity containing the list of PatientStudy objects, or an
      *         error response if an exception occurs
      */
-    @GetMapping("/dashboard")
+    @GetMapping("/dashboard") // specifies as get method
     public ResponseEntity<List<PatientStudy>> getPatientStudies() {
         try {
             List<PatientStudy> patientStudies = dashboardService.getPatientStudyDetails();

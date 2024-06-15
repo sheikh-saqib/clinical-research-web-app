@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -69,6 +70,8 @@ public class PatientController {
      *         error response if the patient is not found or an exception occurs.
      */
     @GetMapping("/{id}")
+    // @Cacheable(value = "patients", key = "#id") // Cache with name "patients" and
+    // key as the patient ID
     public ResponseEntity<Optional<Patient>> getPatientById(@PathVariable Long id) {
         try {
             Optional<Patient> patient = patientService.findById(id);
